@@ -7,128 +7,104 @@ window.NMS = window.NMS || {};
   'use strict';
   const U = N.util;
 
+  /* Lesson 1 — set up safely, then treat.
+     The unit boots at 0.2 ms / 10 Hz on purpose: the trainee has to bring it
+     down before the patient is connected. Once the safe values are set, the
+     pulse width and frequency drop out of the lesson entirely — from there it
+     is about the patient, and those two controls stay untouched. */
   const STEPS = [
     {
       id: 'power',
       title: 'Power on the device',
-      body: 'Press and <strong>hold</strong> the power button for about one second. The device boots in under five seconds and shows the model and firmware version.',
-      hint: 'The power button is the round burgundy button at the bottom of the device.',
+      body: 'Press and <strong>hold</strong> the power button for about one second. The unit boots and shows its model and firmware version.',
+      hint: 'The power button is the burgundy button at the bottom of the device.',
       target: 'power',
       check: s => s.phase === 'main'
     },
     {
       id: 'cable',
       title: 'Insert the treatment cable',
-      body: 'Plug the treatment cable into the connector at the top of the device. Until it is inserted the screen shows <em>INSERT CABLE</em> and stimulation is blocked.',
-      hint: 'Tap the cable socket at the top of the device, or use the Connect cable button.',
+      body: 'Plug the treatment cable into the connector at the top of the unit. Until it is inserted the screen reads <em>INSERT CABLE</em> and stimulation is blocked.',
+      hint: 'Tap the connector at the top of the device.',
       target: 'cable',
       check: s => s.cable
     },
     {
       id: 'electrode',
       title: 'Place the reference electrode',
-      body: 'Apply the reference (grounding) electrode <strong>contralaterally</strong> — on the opposite side of the body from the treatment area. Connect the red clip to the electrode.',
-      hint: 'Use the Procedure panel on the left. Contralateral placement is the recommended default.',
+      body: 'Apply the reference (grounding) electrode <strong>contralaterally</strong> — on the opposite side of the body from the treatment area.',
+      hint: 'The Procedure buttons are in the Patient panel.',
       target: 'electrode',
+      look: 'patient',
       check: s => s.electrode
     },
     {
       id: 'gel',
       title: 'Apply conductive gel',
-      body: 'Apply a fair amount of conductive gel to the treatment area. Dry skin pushes circuit impedance above 13&nbsp;kΩ, so the delivered current drops and the device shows an impedance warning.',
-      hint: 'Watch the Skin impedance value in the Patient card — gel drops it sharply.',
+      body: 'Apply a fair amount of conductive gel to the treatment area. Dry skin pushes impedance past 13&nbsp;kΩ, the delivered current drops and the unit warns.',
+      hint: 'Watch the skin impedance in the Patient panel — gel drops it sharply.',
       target: 'gel',
+      look: 'patient',
       check: s => s.gel
     },
     {
       id: 'probe',
       title: 'Place the treatment probe',
-      body: 'Place the probe tip on the skin over the treatment site. The probe and the reference electrode now form a closed circuit.',
+      body: 'Place the probe on the skin over the treatment site. The probe and the reference electrode now form a closed circuit.',
       hint: 'The circuit badge turns green when the probe is on skin.',
       target: 'probe',
+      look: 'patient',
       check: s => s.probe
     },
     {
-      id: 'pulse',
+      id: 'pw',
       title: 'Set the pulse width to 0.1 ms',
-      body: 'Press the <strong>Menu / Pulse Width</strong> button to toggle between 0.1&nbsp;ms and 0.2&nbsp;ms. Finish with the screen showing 0.1&nbsp;ms.',
-      hint: 'From 0.1 ms one press shows 0.2 — press again to return. 0.2 ms delivers twice the charge at the same current, so always halve the current if you switch up.',
+      body: 'The unit has booted at <strong>0.2&nbsp;ms</strong>. Press the <strong>Menu</strong> button once so the screen reads 0.1&nbsp;ms. At 0.2&nbsp;ms every pulse carries twice the charge, so this comes down before the patient is stimulated.',
+      hint: 'One press of Menu takes 0.2 ms to 0.1 ms — check the chip in the bottom-left of the screen.',
       target: 'menu',
-      check: s => s.pw === 0.1 && s.counts.pw > 0
+      check: s => s.pw === 0.1
     },
     {
       id: 'freq',
-      title: 'Check the stimulation frequency',
-      body: 'Press the <strong>Enter / Hz</strong> button to cycle 1 → 2 → 5 → 10 Hz. Most treatments start at 2&nbsp;Hz.',
-      hint: 'Higher frequencies feel sharper and recruit more fibres per second.',
+      title: 'Drop the frequency to 2 Hz',
+      body: 'The unit has booted at <strong>10&nbsp;Hz</strong>. Press <strong>Enter / Hz</strong> until the screen reads 2&nbsp;Hz. Slower stimulation lets you judge each response before the next pulse arrives.',
+      hint: 'Keep pressing Enter — the unit cycles 1, 2, 5 and 10 Hz.',
       target: 'enter',
-      check: s => s.counts.freq > 0
+      check: s => s.freq === 2
     },
     {
       id: 'start',
       title: 'Start stimulation',
-      body: 'Press the <strong>play/pause</strong> button in the centre of the wheel. The countdown starts and the screen shows <em>OPEN CIRCUIT DETECTED</em> until the probe completes the circuit.',
-      hint: 'You can also press Space on a keyboard.',
+      body: '0.1&nbsp;ms and 2&nbsp;Hz are set. Press the <strong>play</strong> button in the centre of the wheel to start.',
+      hint: 'From here the settings stay put — the rest of this lesson is about the patient.',
       target: 'play',
       check: s => s.stimulating
     },
     {
-      id: 'contact',
-      title: 'Complete the circuit',
-      body: 'With the probe on skin the LED flashes <strong>green</strong>, the device beeps with every stimulus and the screen shows the actual current delivered.',
-      hint: 'If the LED flashes red, the probe is not making contact or the electrode has lifted.',
-      target: 'play',
-      check: s => s.stimulating && s.circuit
-    },
-    {
       id: 'nerve',
-      title: 'Locate the nerve',
-      body: 'Turn the wheel to raise the current slowly. Watch the fasciculation indicator — a motor nerve will twitch once the current passes its threshold.',
-      hint: 'Drag around the wheel, or tap its upper half. Each 20° of rotation = 1 mA.',
+      title: 'Find the nerve',
+      body: 'Turn the wheel to raise the current slowly. Watch the <strong>fasciculation</strong> bar — a motor nerve twitches once the current passes its threshold.',
+      hint: 'Do not touch the pulse width or frequency now. Raise the current one step at a time.',
       target: 'wheel',
       check: s => s.stimulating && s.circuit && s.fasc.active
     },
     {
       id: 'therapeutic',
-      title: 'Find the therapeutic level',
-      body: 'Keep increasing until the comfort meter enters the <strong>therapeutic band</strong> (40–59). That is the strongest stimulus the patient tolerates comfortably.',
-      hint: 'Hold the level for a moment — the meter is smoothed so it will settle.',
+      title: 'Settle into the therapeutic band',
+      body: 'Adjust the current until the patient is tolerating it — comfort in the green band (40–59). That is your treatment level for this session.',
+      hint: 'Watch the pain bar: if it climbs, ease the current back down one step.',
       target: 'wheel',
       dwell: 1.6,
+      look: 'coach',
       check: s => s.stimulating && s.circuit && s.comfort >= 40 && s.comfort <= 59
     },
     {
-      id: 'hold',
-      title: 'Hold the site',
-      body: 'Keep the probe on the stimulation site. In a real session you would hold it for <strong>5–10 minutes</strong>. Stay in the therapeutic band while the timer runs down.',
-      hint: 'Use Trainer speed in the Session tab if you want to fast-forward the countdown.',
-      target: 'wheel',
-      dwell: 6,
-      check: s => s.stimulating && s.circuit && s.comfort >= 32 && s.comfort <= 68
-    },
-    {
-      id: 'accommodate',
-      title: 'Manage accommodation',
-      body: 'Nerves accommodate: the same current starts to feel weaker. When comfort drifts up, increase the current slightly to stay in the therapeutic band.',
-      hint: 'Increase by 1–2 mA and watch the meter come back down into the band.',
-      target: 'wheel',
-      check: (s, step) => s.current > step.current && s.comfort <= 62
-    },
-    {
-      id: 'rule',
-      title: 'Know the 0.2 ms rule',
-      body: 'If you reach <strong>30 mA at 0.1 ms</strong>, switch the pulse width to 0.2&nbsp;ms and turn the current down to <strong>15 mA</strong>, then increase again. The charge per pulse is the same — you have twice the headroom.',
-      hint: 'Charge = current × pulse width. Doubling the width doubles the charge.',
-      target: 'menu',
-      manual: true
-    },
-    {
       id: 'finish',
-      title: 'Finish the session',
-      body: 'Press play/pause to stop, or hold it for two seconds to reset the countdown. When the timer reaches 00:00 stimulation stops, an alarm sounds and the timer resets.',
-      hint: 'You can now keep practising freely — the tutorial stays available.',
+      title: 'Stop and note the values',
+      body: 'Press play to stop. <strong>Lesson 1 complete</strong> — you set the unit up safely and found the nerve. Next up: the 0.2&nbsp;ms / 15&nbsp;mA rule, then the setup menu and waveform.',
+      hint: 'Leave the pulse width and frequency alone from here.',
       target: 'play',
-      manual: true
+      check: s => !s.stimulating && s.everStarted
     }
   ];
 
@@ -143,6 +119,12 @@ window.NMS = window.NMS || {};
   let active = true;
 
   const TOTAL = STEPS.length;
+
+  // Saved progress is versioned: bump LESSON whenever STEPS changes shape, so
+  // an in-flight run from an older lesson is discarded instead of resumed
+  // into the wrong step.
+  const LESSON = 2;
+  const STORE_KEY = 'tutorial';
 
   function snapshot() {
     const d = N.device.state;
@@ -160,6 +142,8 @@ window.NMS = window.NMS || {};
       gel: d.gel,
       probe: d.probe,
       stimulating: d.stimulating,
+      everStarted: d.everStarted,
+      completed: d.completed,
       circuit,
       pw: d.pw,
       freq: d.freq,
@@ -188,21 +172,38 @@ window.NMS = window.NMS || {};
 
   function complete(manual) {
     const st = step();
-    if (!done.includes(st.id)) {
+    const first = !done.includes(st.id);
+    if (first) {
       done.push(st.id);
-      if (!manual) {
-        N.audio.success();
-        U.toast('Step complete — ' + st.title, 'ok', 1800);
-      }
+      if (!manual) N.audio.success();
     }
     persist();
     if (index < TOTAL - 1) {
       enterStep(index + 1, true);
     } else {
       render();
-      U.toast('Tutorial complete. Free practice unlocked.', 'ok', 3200);
-      N.audio.success();
+      clearLook();
+      // only ever announce the ending once, however often the last check passes
+      if (first) {
+        U.toast('Lesson 1 complete — 0.1 ms · 2 Hz · nerve found', 'ok', 3600);
+        N.audio.success();
+      }
     }
+  }
+
+  /** highlight the bottom-nav panel the current step needs (mobile only)
+      step.look uses human names; the nav buttons key off data-panel */
+  function applyLook() {
+    const map = { patient: 'left', coach: 'right' };
+    const look = step().look || '';
+    const need = map[look] || look;
+    U.$$('#mobileNav button').forEach(b => {
+      b.classList.toggle('is-attention', !!need && b.dataset.panel === need);
+    });
+  }
+
+  function clearLook() {
+    U.$$('#mobileNav button').forEach(b => b.classList.remove('is-attention'));
   }
 
   function hintTarget(key) {
@@ -224,15 +225,21 @@ window.NMS = window.NMS || {};
   }
 
   function persist() {
-    U.store.set('tutorial', { index, done });
+    U.store.set(STORE_KEY, { v: LESSON, index, done });
   }
 
   function restore() {
-    const saved = U.store.get('tutorial', null);
-    if (saved && Array.isArray(saved.done)) {
-      done = saved.done;
-      index = U.clamp(saved.index || 0, 0, TOTAL - 1);
+    const saved = U.store.get(STORE_KEY, null);
+    // A saved run from an older step list must never be resumed: the old ids
+    // do not exist any more, the index points into a different step, and the
+    // done count can exceed the new total (which freezes the lesson).
+    if (!saved || saved.v !== LESSON || !Array.isArray(saved.done)) {
+      done = [];
+      index = 0;
+      return;
     }
+    done = saved.done.filter(id => STEPS.some(s => s.id === id));
+    index = U.clamp(saved.index || 0, 0, TOTAL - 1);
   }
 
   function render() {
@@ -263,6 +270,8 @@ window.NMS = window.NMS || {};
         'Step ' + (index + 1) + ' of ' + TOTAL + ': ' + st.title + ' — show the coach panel');
     }
 
+    applyLook();
+
     el.list.innerHTML = STEPS.map((s, i) => {
       const cls = done.includes(s.id) ? 'is-done' : (i === index ? 'is-current' : '');
       return '<li class="' + cls + '" data-i="' + i + '"><span class="n">' + (i + 1) + '</span><span>' + s.title + '</span></li>';
@@ -275,6 +284,8 @@ window.NMS = window.NMS || {};
 
   function tick(dt) {
     if (!active || !el.title) return;
+    // a finished lesson stops evaluating; Restart clears `done` and re-arms it
+    if (done.length >= TOTAL) return;
 
     // wait for a pending advance
     if (advanceTimer > 0) {
@@ -314,9 +325,10 @@ window.NMS = window.NMS || {};
   function restart() {
     done = [];
     comfortEma = null;
+    N.device.prepareLesson();
     enterStep(0);
     persist();
-    U.toast('Tutorial restarted', 'ok', 1600);
+    U.toast('Lesson 1 restarted — the unit is back at 0.2 ms / 10 Hz', 'ok', 2400);
   }
 
   function init() {
@@ -350,6 +362,9 @@ window.NMS = window.NMS || {};
     }
 
     restore();
+    // a lesson that has not started yet always begins from 0.2 ms / 10 Hz,
+    // even if an earlier session saved friendlier defaults
+    if (index === 0 && done.length === 0) N.device.prepareLesson();
     render();
     hintTarget(step().target);
   }

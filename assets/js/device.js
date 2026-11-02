@@ -1060,7 +1060,9 @@ window.NMS = window.NMS || {};
 
   function init() {
     cache();
-    const saved = U.store.get('defaults', null);
+    // v2: the defaults now boot at 0.2 ms / 10 Hz, so a stored 0.1 / 2 from an
+    // earlier build must not override them.
+    const saved = U.store.get('defaults2', null);
     if (saved) {
       if (saved.lang) D.lang = saved.lang;
       if (saved.wave) D.wave = saved.wave;
@@ -1115,6 +1117,27 @@ window.NMS = window.NMS || {};
     return true;
   }
 
+  /**
+   * Put the unit back into the state the first lesson starts from: switched
+   * off, nothing attached, and — deliberately — the unsafe settings the
+   * trainee has to correct (0.2 ms / 10 Hz). Called by tutorial.restart().
+   */
+  function prepareLesson() {
+    if (D.power) togglePower();
+    if (D.cable) setCable(false);
+    if (D.electrode) setElectrode(false);
+    if (D.gel) setGel(false);
+    if (D.probe) setProbe(false);
+    D.pw = 0.2;
+    D.freq = 10;
+    D.current = 0;
+    D.actual = null;
+    D.counts = { pw: 0, freq: 0, current: 0 };
+    D.timer = D.timerSet;
+    renderAll();
+    U.emit('device:change');
+  }
+
   N.device = {
     state: D,
     init,
@@ -1145,6 +1168,7 @@ window.NMS = window.NMS || {};
     renderAll,
     persistDefaults,
     resetDefaults,
+    prepareLesson,
     get current() { return D.current; },
     get timer() { return D.timer; }
   };

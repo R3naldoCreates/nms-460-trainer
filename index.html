@@ -28,10 +28,10 @@
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<link rel="stylesheet" href="assets/css/base.css?v=9">
-<link rel="stylesheet" href="assets/css/device.css?v=9">
-<link rel="stylesheet" href="assets/css/panels.css?v=9">
-<link rel="stylesheet" href="assets/css/responsive.css?v=9">
+<link rel="stylesheet" href="assets/css/base.css?v=13">
+<link rel="stylesheet" href="assets/css/device.css?v=13">
+<link rel="stylesheet" href="assets/css/panels.css?v=13">
+<link rel="stylesheet" href="assets/css/responsive.css?v=13">
 </head>
 <body>
 
@@ -293,10 +293,11 @@
               <!-- ground shadow -->
               <ellipse class="device-static" cx="200" cy="562" rx="128" ry="15" fill="#000" opacity=".55" filter="url(#fBlur)"/>
 
-              <!-- cable, shown when inserted -->
+              <!-- cable, shown when inserted. Kept as a short stub: a long
+                   run-up would cross the step strip above the device -->
               <g class="dev-cable" id="cablePlug" opacity="0">
-                <path d="M196 -120c0 60 4 90 4 166" fill="none" stroke="#1c4f47" stroke-width="9" stroke-linecap="round"/>
-                <path d="M196 -120c0 60 4 90 4 166" fill="none" stroke="#2f7d70" stroke-width="4" stroke-linecap="round" opacity=".65"/>
+                <path d="M196 -18c0 26 4 42 4 64" fill="none" stroke="#1c4f47" stroke-width="9" stroke-linecap="round"/>
+                <path d="M196 -18c0 26 4 42 4 64" fill="none" stroke="#2f7d70" stroke-width="4" stroke-linecap="round" opacity=".65"/>
                 <rect x="182" y="26" width="36" height="24" rx="7" fill="#2b3234"/>
                 <rect x="186" y="30" width="28" height="9" rx="3" fill="#2f7d70"/>
                 <rect x="180" y="42" width="40" height="12" rx="4" fill="#3a4245"/>
@@ -477,6 +478,19 @@
             <span class="statusbar__dot" id="statusDot"></span>
             <span class="statusbar__text" id="statusText">Device off — press and hold the power button</span>
           </div>
+
+          <!-- compact patient vitals, shown on phones so the response is
+               visible while the device is in front of you -->
+          <div class="vitals" id="vitals" aria-hidden="true">
+            <div class="vitals__group">
+              <span class="vitals__label">Fasciculation</span>
+              <span class="vitals__bars" id="vitalsFasc"><i></i><i></i><i></i><i></i><i></i></span>
+            </div>
+            <div class="vitals__group vitals__group--right">
+              <span class="vitals__label">Pain</span>
+              <span class="vitals__bars vitals__bars--pain" id="vitalsPain"><i></i><i></i><i></i><i></i><i></i></span>
+            </div>
+          </div>
         </div>
 
         <!-- ----------- RIGHT RAIL ----------- -->
@@ -653,14 +667,14 @@
   </div>
 </div>
 
-<script src="assets/js/config.js?v=9"></script>
-<script src="assets/js/core.js?v=9"></script>
-<script src="assets/js/audio.js?v=9"></script>
-<script src="assets/js/patient.js?v=9"></script>
-<script src="assets/js/device.js?v=9"></script>
-<script src="assets/js/wheel.js?v=9"></script>
-<script src="assets/js/tutorial.js?v=9"></script>
-<script src="assets/js/guide.js?v=9"></script>
-<script src="assets/js/app.js?v=9"></script>
+<script src="assets/js/config.js?v=13"></script>
+<script src="assets/js/core.js?v=13"></script>
+<script src="assets/js/audio.js?v=13"></script>
+<script src="assets/js/patient.js?v=13"></script>
+<script src="assets/js/device.js?v=13"></script>
+<script src="assets/js/wheel.js?v=13"></script>
+<script src="assets/js/tutorial.js?v=13"></script>
+<script src="assets/js/guide.js?v=13"></script>
+<script src="assets/js/app.js?v=13"></script>
 </body>
 </html>

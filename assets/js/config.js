@@ -29,8 +29,10 @@ NMS.config = {
   session: {
     defaultCountdown: 600,   // seconds (10:00)
     defaultCurrent: 0,
-    defaultPulseWidth: 0.1,
-    defaultFrequency: 2,
+    // The unit boots at the *unsafe* settings on purpose: the first lesson is
+    // to bring it down to 0.1 ms and 2 Hz before touching the patient.
+    defaultPulseWidth: 0.2,
+    defaultFrequency: 10,
     autoShutdown: 600,       // 10 min of no interaction
     currentMax: 30,
     pulseWidths: [0.1, 0.2],

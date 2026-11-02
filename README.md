@@ -33,7 +33,7 @@ The site works from `file://` as well — all assets are local.
 - **Treatment workflow** — insert the cable, place the reference electrode, apply gel, place the probe, set 0.1 ms / 2 Hz, start and pause.
 - **Wheel and buttons** — drag around the wheel (20° per 1 mA), tap the upper/right half to increase, lower/left to decrease; short-press Menu to toggle pulse width, hold Menu for the setup menu; short-press Enter to cycle frequency; hold play for 2 s to reset the timer.
 - **Patient response** — a simulated comfort meter with a randomised ceiling (15.0–30.0 in 0.1 steps at 0.1 ms), fasciculation onset, skin impedance, accommodation and delivered-current mismatch.
-- **Guided tutorial** — 15 state-checked steps with progress saved in `localStorage`. Switch to the **Session** tab to ignore the tutorial and play freely.
+- **Guided tutorial — Lesson 1 (11 state-checked steps).** The unit boots at **0.2 ms / 10 Hz on purpose**; the trainee has to bring it down to **0.1 ms** with the Menu button and **2 Hz** with Enter before stimulating, then the lesson turns entirely to the patient: start, find the nerve by fasciculation, settle into the therapeutic band, stop. After those two settings are corrected the lesson never asks for them again — changing pulse width or frequency mid-treatment is what the lesson teaches you not to do. Progress is saved in `localStorage`; **Restart tutorial** puts the unit back to 0.2 ms / 10 Hz. Switch to the **Session** tab to ignore the tutorial and play freely. Lessons 2 (the 0.2 ms / 15 mA rule) and 3 (setup menu and waveform) come next.
 - **Reference** — device layout, screen map, menu tree, treatment workflow, nerve landmarks and motor responses, warnings, troubleshooting, safety and specifications.
 
 ## Controls
@@ -49,7 +49,7 @@ The site works from `file://` as well — all assets are local.
 | Adjust current | Drag / tap the wheel | `↑` `↓` `←` `→` |
 | Back / close menu | — | `Esc` |
 
-On a phone or portrait tablet the layout switches to three panels — **Device**, **Patient**, **Coach** — using the bottom bar. While the Device panel is showing, a strip above the unit carries the current tutorial step (number, title and progress); tapping it jumps to the coach panel, so you never have to lose your place on the device. In landscape the unit sits on the left with the active panel beside it and the rail scrolls.
+On a phone or portrait tablet the layout switches to three panels — **Device**, **Patient**, **Coach** — using the bottom bar. While the Device panel is showing, a strip above the unit carries the current tutorial step (number, title and progress); tapping it jumps to the coach panel, so you never have to lose your place on the device. When a lesson step needs a different panel, that panel's button pulses in the bottom bar. Under the unit, **Fasciculation** (left) and **Pain** (right) show the patient response while you work the device. In landscape the unit sits on the left with the active panel beside it and the rail scrolls.
 
 Layout breakpoints (all in `assets/css/responsive.css`): three columns ≥ 1100 px, two columns 900–1099 px, single column + bottom bar ≤ 899 px, phone type scale ≤ 560 px, extra-small ≤ 380 px, two-column landscape under 560 px tall.
 

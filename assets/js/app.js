@@ -327,6 +327,32 @@ window.NMS = window.NMS || {};
     updatePatientLive();
     updateComfort();
     updateFasc();
+    updateVitals();
+  }
+
+  /* ── compact vitals on the device view (phones) ─────── */
+
+  function updateVitals() {
+    if (!el.vitalsFasc) return;
+    const s = N.device.state;
+    const active = s.stimulating && N.device.circuit();
+    const load = N.device.load();
+
+    const f = active ? N.patient.fasciculation(load) : { index: 0 };
+    Array.from(el.vitalsFasc.children).forEach((bar, i) => {
+      bar.classList.toggle('is-on', active && i < f.index);
+      bar.classList.toggle('is-hot', active && f.index >= 4 && i === 4);
+    });
+
+    // pain is the inverse of comfort: empty when the patient is comfortable
+    const score = active ? N.patient.comfort(load).score : 100;
+    const pain = Math.max(0, Math.min(100, 100 - score));
+    const level = active ? Math.ceil(pain / 20) : 0;
+    Array.from(el.vitalsPain.children).forEach((bar, i) => {
+      bar.classList.toggle('is-on', i < level);
+      bar.classList.toggle('is-hot', level >= 4 && i >= 3);
+    });
+    el.vitals.classList.toggle('is-live', !!active);
   }
 
   /* ── event log ──────────────────────────────────────── */
@@ -549,6 +575,8 @@ window.NMS = window.NMS || {};
       btn.addEventListener('click', () => {
         el.sim.dataset.mobile = btn.dataset.panel;
         $$('#mobileNav button').forEach(b => b.classList.toggle('is-active', b === btn));
+        // the "go here" glow has done its job once the panel is open
+        btn.classList.remove('is-attention');
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
     });
@@ -723,6 +751,10 @@ window.NMS = window.NMS || {};
     el.fascProbe = $('#fascProbe');
     el.fascValue = $('#fascValue');
     el.fascBars = $('#fascBars');
+
+    el.vitals = $('#vitals');
+    el.vitalsFasc = $('#vitalsFasc');
+    el.vitalsPain = $('#vitalsPain');
     el.ripple1 = $('#ripple1');
     el.ripple2 = $('#ripple2');
     el.fascSpark = $('#fascSpark');
