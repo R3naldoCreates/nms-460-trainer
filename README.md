@@ -41,7 +41,9 @@ The site works from `file://` as well — all assets are local.
 | Adjust current | Drag / tap the wheel | `↑` `↓` `←` `→` |
 | Back / close menu | — | `Esc` |
 
-On a phone the layout switches to three panels — **Device**, **Patient**, **Coach** — using the bottom bar.
+On a phone or portrait tablet the layout switches to three panels — **Device**, **Patient**, **Coach** — using the bottom bar. While the Device panel is showing, a strip above the unit carries the current tutorial step (number, title and progress); tapping it jumps to the coach panel, so you never have to lose your place on the device. In landscape the unit sits on the left with the active panel beside it and the rail scrolls.
+
+Layout breakpoints (all in `assets/css/responsive.css`): three columns ≥ 1100 px, two columns 900–1099 px, single column + bottom bar ≤ 899 px, phone type scale ≤ 560 px, extra-small ≤ 380 px, two-column landscape under 560 px tall.
 
 ## Project layout
 

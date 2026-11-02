@@ -253,6 +253,16 @@ window.NMS = window.NMS || {};
     el.next.textContent = st.manual ? 'Mark as done' : 'Next step';
     el.prev.disabled = index === 0;
 
+    // mirror the step into the strip shown above the device on phones,
+    // where the coach panel is behind its own tab
+    if (el.stripTitle) {
+      el.stripCount.textContent = (index + 1) + '/' + TOTAL;
+      el.stripTitle.textContent = st.title;
+      el.stripBar.style.width = pct + '%';
+      el.strip.setAttribute('aria-label',
+        'Step ' + (index + 1) + ' of ' + TOTAL + ': ' + st.title + ' — show the coach panel');
+    }
+
     el.list.innerHTML = STEPS.map((s, i) => {
       const cls = done.includes(s.id) ? 'is-done' : (i === index ? 'is-current' : '');
       return '<li class="' + cls + '" data-i="' + i + '"><span class="n">' + (i + 1) + '</span><span>' + s.title + '</span></li>';
@@ -322,9 +332,22 @@ window.NMS = window.NMS || {};
     el.next = U.$('#tutNext');
     el.prev = U.$('#tutPrev');
 
+    // step strip (visible <= 899px only; harmless elsewhere)
+    el.strip = U.$('#stepStrip');
+    el.stripCount = U.$('#stepStripCount');
+    el.stripTitle = U.$('#stepStripTitle');
+    el.stripBar = U.$('#stepStripBar');
+
     U.$('#tutNext').addEventListener('click', next);
     U.$('#tutPrev').addEventListener('click', prev);
     U.$('#tutRestart').addEventListener('click', restart);
+
+    if (el.strip) {
+      el.strip.addEventListener('click', () => {
+        const coach = U.$('#mobileNav button[data-panel="right"]');
+        if (coach) coach.click();
+      });
+    }
 
     restore();
     render();

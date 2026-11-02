@@ -2,6 +2,12 @@
    responsive.css — desktop, tablet, phone
    ============================================================ */
 
+/* ── step strip: hidden except on phones / portrait tablets ──
+   Shows the current tutorial step over the device, because at these
+   widths the coach panel lives behind its own tab. */
+
+.stepstrip{ display:none; }
+
 /* ── large desktop ─────────────────────────────────────── */
 
 @media (min-width: 1560px){
@@ -23,9 +29,12 @@
   .stage__hints{ max-width:440px; }
 }
 
-/* ── tablet: two columns, patient panel moves under device ── */
+/* ── tablet: two columns, patient panel moves under device ──
+   Breakpoint sits at 1099 so an iPad in landscape (1024 × 768)
+   gets the roomier two-column layout instead of the cramped
+   three-column desktop grid. */
 
-@media (max-width: 1023px){
+@media (max-width: 1099px){
   .sim{
     grid-template-columns:minmax(0,1fr) minmax(290px,330px);
     grid-template-areas:
@@ -77,6 +86,72 @@
 
   .stage{ padding-top:0; }
   .stage__glow{ top:0; width:min(460px,100%); }
+
+  /* the current step stays visible above the device */
+  .stepstrip{
+    appearance:none;
+    -webkit-appearance:none;
+    display:grid;
+    grid-template-columns:auto minmax(0,1fr) auto;
+    grid-template-areas:
+      "count title chev"
+      "bar   bar   bar";
+    align-items:center;
+    gap:1px 9px;
+    width:min(100%, 400px);
+    margin:0 auto 2px;
+    padding:9px 13px 0;
+    border:1px solid var(--mint-line);
+    border-radius:13px;
+    background:rgba(56,232,176,.07);
+    color:var(--ink);
+    font-family:inherit;
+    text-align:left;
+    cursor:pointer;
+    -webkit-tap-highlight-color:transparent;
+    transition:background .18s;
+  }
+  .stepstrip:active{ background:rgba(56,232,176,.14); }
+  .stepstrip__count{
+    grid-area:count;
+    font-size:10.5px;
+    font-weight:700;
+    letter-spacing:.08em;
+    color:var(--mint);
+    font-variant-numeric:tabular-nums;
+  }
+  .stepstrip__title{
+    grid-area:title;
+    font-size:12.5px;
+    font-weight:600;
+    line-height:1.3;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .stepstrip__chev{
+    grid-area:chev;
+    width:15px;
+    height:15px;
+    color:var(--mint);
+    opacity:.7;
+  }
+  .stepstrip__bar{
+    grid-area:bar;
+    display:block;
+    height:3px;
+    margin:7px -13px 0;
+    border-radius:0 0 12px 12px;
+    background:rgba(255,255,255,.07);
+    overflow:hidden;
+  }
+  .stepstrip__bar i{
+    display:block;
+    height:100%;
+    width:0;
+    background:var(--mint);
+    transition:width .32s var(--ease);
+  }
 
   .device{
     width:min(100%, 400px, calc((100dvh - 210px) * 0.6667));
@@ -214,12 +289,67 @@
   .guide .screenmap{ grid-template-columns:1fr; }
 }
 
-/* ── landscape phones ──────────────────────────────────── */
+/* ── landscape phones: device beside the active panel ────
+   The device is height-bound here, so the spare width is spent on a
+   panel instead of empty space. The "Device" tab pairs with the coach
+   so the current step stays readable while you operate the unit. */
 
-@media (max-height: 560px) and (orientation: landscape){
-  .device{
-    width:min(64vw, calc((100dvh - 130px) * 0.6667));
+@media (max-height: 560px) and (orientation: landscape) and (max-width: 1099px){
+  .app{ padding-bottom:0; }
+  .appfoot{ display:none; }
+
+  .sim{
+    display:grid;
+    grid-template-columns:auto minmax(0, 520px);
+    grid-template-areas:"stage side";
+    justify-content:center;
+    align-items:start;
+    gap:10px;
+    max-width:none;
+    padding:6px 10px 58px;
   }
+
+  /* keep the comfort card compact enough to fit the short rail */
+  .rail--right .gauge{ width:min(100%, 210px); margin:0 auto; }
+  .rail--right .gauge__value span{ font-size:26px; }
+  .rail--right .comfort__readout{ width:min(100%, 340px); margin:10px auto 0; }
+  .rail--right .comfort__hint{ width:min(100%, 430px); margin-left:auto; margin-right:auto; }
+
+  .stage{ grid-area:stage; padding-top:0; }
+  .stage__glow{ top:0; }
+  .stepstrip{ display:none; }
+
+  .rail--left,
+  .rail--right{
+    grid-area:side;
+    max-height:calc(100dvh - 112px);
+    overflow-y:auto;
+    overscroll-behavior:contain;
+    padding-right:2px;
+  }
+  /* flex children must not shrink, or the cards squash instead of the rail scrolling */
+  .rail--left > .card,
+  .rail--right > .card{ flex:0 0 auto; }
+  .rail--left,
+  .rail--right{ display:none; }
+
+  .sim[data-mobile="stage"] .stage,
+  .sim[data-mobile="left"]  .stage,
+  .sim[data-mobile="right"] .stage{ display:flex; }
+
+  .sim[data-mobile="stage"] .rail--right,
+  .sim[data-mobile="right"] .rail--right,
+  .sim[data-mobile="left"]  .rail--left{
+    display:flex;
+    flex-direction:column;
+  }
+
+  /* never let the body clip the unit: height drives the width here */
+  .device{
+    width:min(46vw, calc((100dvh - 120px) * 0.6667));
+    min-width:0;
+  }
+
   .stage__hints, .statusbar{ display:none; }
   .mobilenav{ padding:4px 8px; }
   .mobilenav button{ flex-direction:row; gap:7px; font-size:11px; padding:6px 4px; }

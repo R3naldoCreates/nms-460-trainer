@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -10,16 +10,16 @@
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<link rel="stylesheet" href="assets/css/base.css?v=6">
-<link rel="stylesheet" href="assets/css/device.css?v=6">
-<link rel="stylesheet" href="assets/css/panels.css?v=6">
-<link rel="stylesheet" href="assets/css/responsive.css?v=6">
+<link rel="stylesheet" href="assets/css/base.css?v=7">
+<link rel="stylesheet" href="assets/css/device.css?v=7">
+<link rel="stylesheet" href="assets/css/panels.css?v=7">
+<link rel="stylesheet" href="assets/css/responsive.css?v=7">
 </head>
 <body>
 
 <div class="app">
 
-  <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• TOP BAR â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+  <!-- ========================== TOP BAR ========================== -->
   <header class="topbar">
     <a class="brand" href="#" data-view="sim" aria-label="Algiamed NMS 460 training simulator home">
       <span class="brand__mark" aria-hidden="true">
@@ -65,11 +65,11 @@
 
   <main class="main">
 
-    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• SIMULATOR â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+    <!-- ========================== SIMULATOR ========================== -->
     <section class="view is-active" id="view-sim">
       <div class="sim" id="sim">
 
-        <!-- â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ LEFT RAIL â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+        <!-- ----------- LEFT RAIL ----------- -->
         <aside class="rail rail--left" id="railLeft">
 
           <!-- Patient -->
@@ -201,9 +201,23 @@
           </section>
         </aside>
 
-        <!-- â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ CENTRE STAGE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+        <!-- ----------- CENTRE STAGE ----------- -->
         <div class="stage">
           <div class="stage__glow" aria-hidden="true"></div>
+
+          <!-- current tutorial step, kept in view while the device is on screen.
+               Only displayed on phones / portrait tablets (<= 899px), where the
+               coach panel is a separate tab. Wired in tutorial.js render(). -->
+          <button class="stepstrip" id="stepStrip" type="button"
+                  aria-label="Show the coach panel for the current step">
+            <span class="stepstrip__count" id="stepStripCount">1/15</span>
+            <span class="stepstrip__title" id="stepStripTitle">Power on the device</span>
+            <svg class="stepstrip__chev" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.8"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="stepstrip__bar"><i id="stepStripBar"></i></span>
+          </button>
 
           <!-- THE DEVICE -->
           <div class="device" id="device" data-power="off" data-hint="device">
@@ -270,14 +284,14 @@
                 <rect x="180" y="14" width="40" height="14" rx="4" fill="#3a4245"/>
               </g>
 
-              <!-- â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              <!-- -----------------------------------------------------
                    EDITABLE BODY ARTWORK
                    The default is assets/svg/device-body.svg. Replace
                    that file — or point config.device.art at a PNG /
                    WebP render — and the shell changes without touching
                    the live overlays. The inline artwork below is only
                    a fallback if the file cannot be loaded.
-                   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+                   ----------------------------------------------------- -->
               <image id="deviceBodyArt" href="assets/svg/device-body.svg"
                      x="0" y="0" width="400" height="600"
                      preserveAspectRatio="xMidYMid meet" pointer-events="none"/>
@@ -434,7 +448,7 @@
 
           <div class="stage__hints" id="stageHints">
             <span class="kbd-hint"><kbd>Space</kbd> play/pause</span>
-            <span class="kbd-hint"><kbd>â†‘</kbd><kbd>â†“</kbd> current</span>
+            <span class="kbd-hint"><kbd>&uarr;</kbd><kbd>&darr;</kbd> current</span>
             <span class="kbd-hint"><kbd>M</kbd> pulse width</span>
             <span class="kbd-hint"><kbd>F</kbd> frequency</span>
             <span class="kbd-hint"><kbd>Esc</kbd> back</span>
@@ -446,7 +460,7 @@
           </div>
         </div>
 
-        <!-- â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ RIGHT RAIL â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+        <!-- ----------- RIGHT RAIL ----------- -->
         <aside class="rail rail--right" id="railRight">
 
           <!-- Comfort -->
@@ -581,7 +595,7 @@
       </nav>
     </section>
 
-    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• REFERENCE â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+    <!-- ========================== REFERENCE ========================== -->
     <section class="view" id="view-guide" hidden>
       <div class="guide">
         <nav class="guide__nav" id="guideNav" aria-label="Reference sections"></nav>
@@ -620,14 +634,14 @@
   </div>
 </div>
 
-<script src="assets/js/config.js?v=6"></script>
-<script src="assets/js/core.js?v=6"></script>
-<script src="assets/js/audio.js?v=6"></script>
-<script src="assets/js/patient.js?v=6"></script>
-<script src="assets/js/device.js?v=6"></script>
-<script src="assets/js/wheel.js?v=6"></script>
-<script src="assets/js/tutorial.js?v=6"></script>
-<script src="assets/js/guide.js?v=6"></script>
-<script src="assets/js/app.js?v=6"></script>
+<script src="assets/js/config.js?v=7"></script>
+<script src="assets/js/core.js?v=7"></script>
+<script src="assets/js/audio.js?v=7"></script>
+<script src="assets/js/patient.js?v=7"></script>
+<script src="assets/js/device.js?v=7"></script>
+<script src="assets/js/wheel.js?v=7"></script>
+<script src="assets/js/tutorial.js?v=7"></script>
+<script src="assets/js/guide.js?v=7"></script>
+<script src="assets/js/app.js?v=7"></script>
 </body>
 </html>
