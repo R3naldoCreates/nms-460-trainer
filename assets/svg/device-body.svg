@@ -1,162 +1,82 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600" width="400" height="600">
-  <!-- ============================================================
-       NMS 460 front-body artwork  ·  400 × 600 viewBox
-
-       EDIT THIS FILE to change the device shell, buttons, wheel,
-       labels, wordmark or printed model number.
-
-       The simulator overlays the live LCD, cable socket, LED, wheel
-       tick ring and the configurable ALGIAMED footer on top of this
-       image, so leave those areas free if you redraw the body.
-
-       To use a photograph or raster render instead, set
-         NMS.config.device.art = { enabled:true, src:'assets/img/...' }
-       in assets/js/config.js. Keep the same 2:3 proportions and the
-       screen area empty/transparent so the LCD shows through.
-
-       Note: XML comments cannot contain a double hyphen, so use
-       single dashes or equals signs in your own notes.
-       ============================================================ -->
-
-  <defs>
-    <linearGradient id="gBody" x1=".12" y1="0" x2=".88" y2="1">
-      <stop offset="0" stop-color="#fdfcf8"/>
-      <stop offset=".42" stop-color="#f2efe7"/>
-      <stop offset="1" stop-color="#d9d4c7"/>
-    </linearGradient>
-    <linearGradient id="gBodyRim" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#ffffff" stop-opacity=".95"/>
-      <stop offset=".55" stop-color="#ffffff" stop-opacity="0"/>
-      <stop offset="1" stop-color="#a89f8d" stop-opacity=".55"/>
-    </linearGradient>
-    <linearGradient id="gBezel" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#3b4043"/>
-      <stop offset="1" stop-color="#14171a"/>
-    </linearGradient>
-    <linearGradient id="gRecess" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#0a0d0e"/>
-      <stop offset="1" stop-color="#171d1e"/>
-    </linearGradient>
-    <radialGradient id="gBtn" cx=".34" cy=".26" r=".92">
-      <stop offset="0" stop-color="#932f70"/>
-      <stop offset=".55" stop-color="#6b1c50"/>
-      <stop offset="1" stop-color="#470f34"/>
-    </radialGradient>
-    <linearGradient id="gWheel" x1=".18" y1="0" x2=".82" y2="1">
-      <stop offset="0" stop-color="#c9cdce"/>
-      <stop offset=".48" stop-color="#9aa0a2"/>
-      <stop offset="1" stop-color="#767c7e"/>
-    </linearGradient>
-    <radialGradient id="gWheelIn" cx=".5" cy=".42" r=".62">
-      <stop offset="0" stop-color="#c2c7c8"/>
-      <stop offset="1" stop-color="#8b9193"/>
-    </radialGradient>
-    <filter id="fBlur" x="-40%" y="-80%" width="180%" height="260%">
-      <feGaussianBlur stdDeviation="9"/>
-    </filter>
-    <filter id="fSoftShadow" x="-25%" y="-15%" width="150%" height="135%">
-      <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#000" flood-opacity=".5"/>
-    </filter>
-  </defs>
-
-  <style>
-    .wordmark{
-      font-family:"Inter","Segoe UI",Arial,sans-serif;
-      font-weight:700;
-      fill:#d8d3c6;
-      paint-order:stroke;
-      stroke:#ffffff;
-      stroke-width:.6;
-      stroke-opacity:.55;
-      letter-spacing:4.5px;
-    }
-    .model{
-      font-family:"Inter","Segoe UI",Arial,sans-serif;
-      font-weight:800;
-      fill:#c0392b;
-      letter-spacing:1.6px;
-    }
-    .label{
-      font-family:"Inter","Segoe UI",Arial,sans-serif;
-      font-weight:600;
-      fill:#8d8677;
-      letter-spacing:.06em;
-    }
-  </style>
-
-  <!-- ground shadow -->
-  <ellipse cx="200" cy="562" rx="128" ry="15" fill="#000" opacity=".55" filter="url(#fBlur)"/>
-
-  <!-- body shell -->
-  <g filter="url(#fSoftShadow)">
-    <path class="dev-body" d="M78 34Q78 16 96 16L304 16Q322 16 322 34L350 244Q354 270 338 288L324 306Q316 316 316 330L316 446Q316 462 322 476L346 514Q356 536 336 544L300 552Q250 562 200 562Q150 562 100 552L64 544Q44 536 54 514L78 476Q84 462 84 446L84 330Q84 316 76 306L62 288Q46 270 50 244Z"
-          fill="url(#gBody)" stroke="#cfc9bb" stroke-width="1"/>
-  </g>
-  <path d="M78 34Q78 16 96 16L304 16Q322 16 322 34L350 244Q354 270 338 288L324 306Q316 316 316 330L316 446Q316 462 322 476L346 514Q356 536 336 544L300 552Q250 562 200 562Q150 562 100 552L64 544Q44 536 54 514L78 476Q84 462 84 446L84 330Q84 316 76 306L62 288Q46 270 50 244Z"
-        fill="none" stroke="url(#gBodyRim)" stroke-width="2.4" stroke-opacity=".85"/>
-
-  <!-- soft side shading -->
-  <path d="M84 446L78 476Q72 492 62 506" fill="none" stroke="#b7ae9c" stroke-width="8" stroke-opacity=".18" stroke-linecap="round"/>
-  <path d="M316 446L322 476Q328 492 338 506" fill="none" stroke="#ffffff" stroke-width="8" stroke-opacity=".35" stroke-linecap="round"/>
-
-  <!-- LCD bezel and recess (the live screen is an HTML overlay) -->
-  <g class="dev-lcd-frame">
-    <rect x="88" y="54" width="224" height="160" rx="11" fill="url(#gBezel)"/>
-    <rect x="93" y="59" width="214" height="150" rx="7" fill="#0a0d0e"/>
-    <rect x="96" y="62" width="208" height="144" rx="5" fill="url(#gRecess)"/>
-  </g>
-
-  <!-- printed wordmark -->
-  <text class="wordmark" x="200" y="238" text-anchor="middle" font-size="21">STIMPOD</text>
-
-  <!-- button labels -->
-  <text class="label" x="96" y="272" text-anchor="middle" font-size="9">MENU</text>
-  <text class="label" x="304" y="272" text-anchor="middle" font-size="9">ENTER</text>
-
-  <!-- menu button -->
-  <g class="dev-btn">
-    <circle cx="124" cy="300" r="27" fill="#3b0d29"/>
-    <circle cx="124" cy="300" r="25" fill="url(#gBtn)"/>
-    <circle cx="124" cy="300" r="25" fill="none" stroke="#a5447d" stroke-opacity=".5" stroke-width="1"/>
-    <path d="M114 305h5v-10h6v10h5v-10h5v10h5" fill="none" stroke="#f6e9f1" stroke-width="2.4"
-          stroke-linecap="round" stroke-linejoin="round"/>
-  </g>
-
-  <!-- enter button -->
-  <g class="dev-btn">
-    <circle cx="276" cy="300" r="27" fill="#3b0d29"/>
-    <circle cx="276" cy="300" r="25" fill="url(#gBtn)"/>
-    <circle cx="276" cy="300" r="25" fill="none" stroke="#a5447d" stroke-opacity=".5" stroke-width="1"/>
-    <text x="276" y="307" text-anchor="middle" font-family="Bahnschrift, 'DIN Alternate', Arial, sans-serif"
-          font-size="17" font-weight="600" fill="#f6e9f1" letter-spacing=".5">Hz</text>
-  </g>
-
-  <!-- wheel base (the rotating tick ring is overlaid by index.html) -->
-  <g class="dev-wheel">
-    <circle cx="200" cy="356" r="58" fill="#6f7577" opacity=".55"/>
-    <circle cx="200" cy="356" r="56" fill="url(#gWheel)"/>
-    <circle cx="200" cy="356" r="56" fill="none" stroke="#e6e8e8" stroke-opacity=".55" stroke-width="1.2"/>
-    <circle cx="200" cy="356" r="42" fill="url(#gWheelIn)"/>
-    <circle cx="200" cy="356" r="42" fill="none" stroke="#6f7678" stroke-opacity=".5" stroke-width="1"/>
-
-    <!-- chevrons -->
-    <g fill="#f4f6f6">
-      <path d="M200 316l-5 7h10z"/>
-      <path d="M200 396l-5-7h10z"/>
-      <path d="M160 356l7-5v10z"/>
-      <path d="M240 356l-7-5v10z"/>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 400 600" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:affinity="https://www.affinity.studio/" style="fill-rule:evenodd;clip-rule:evenodd;">
+    <use xlink:href="#_Image1" x="39.305" y="535.576" width="322px" height="65px"/>
+    <g transform="matrix(1.106851,0,0,1.106851,-21.387867,-35.075979)">
+        <path d="M50,107.539C50,95.539 66,79.539 78,79.539L321,79.539C333,79.539 349,95.539 349,107.539L350.8,245.154C351.93,267.363 346.209,278.957 334.372,285.691C321.763,291.889 312.43,299.873 304.66,308.71C302.625,311.584 303.416,310.813 303.086,314.539C317.283,352.381 323.779,395.206 323.374,442.496C323.374,453.162 320.474,467.285 317.877,478.68C314.877,490.572 310.103,495.606 306,499.776C276.971,520.476 256.621,522.667 252.298,526.478C250.66,530.565 245.792,533.442 237.118,534.89C217.638,537.764 217.337,537.881 200,537.881C185.797,537.881 185.578,537.888 164.119,533.86C159.141,533.335 154.959,531.788 153.062,527.303C145.775,523.611 114.854,514.371 100.803,501.425C92.793,495.644 87.864,487.553 86.452,476.825C84.474,468.316 82.39,454.734 82.39,444.067C80.375,397.314 87.119,355.173 98.846,313.573C98.952,309.623 98.273,310.239 95.367,306.844C86.018,298.029 76.572,294.395 64.309,287.175C53.642,275.175 47.333,261.333 50,244L50,107.539Z" style="fill:url(#_Linear2);fill-rule:nonzero;stroke:rgb(207,201,187);stroke-width:1px;"/>
+        <g transform="matrix(1,0,0,1,0.075794,-0)">
+            <path d="M200,524.373C200,524.373 188.806,525.339 164.649,520.185C164.649,520.185 170.869,426.616 144.699,373.269C118.528,319.922 93.868,288.215 74.743,280.163C74.743,280.163 82.796,267.078 104.437,261.038C104.437,261.038 148.607,282.156 200,282.156C251.393,282.156 295.563,261.038 295.563,261.038C317.204,267.078 325.257,280.163 325.257,280.163C306.132,288.215 281.472,319.922 255.301,373.269C229.131,426.616 235.351,520.185 235.351,520.185C211.194,525.339 200,524.373 200,524.373Z" style="fill:rgb(83,79,80);"/>
+        </g>
     </g>
-  </g>
-
-  <!-- printed model number -->
-  <text class="model" x="200" y="434" text-anchor="middle" font-size="10">NMS 460</text>
-
-  <!-- power button -->
-  <g class="dev-btn">
-    <circle cx="200" cy="464" r="23" fill="#3b0d29"/>
-    <circle cx="200" cy="464" r="21" fill="url(#gBtn)"/>
-    <circle cx="200" cy="464" r="21" fill="none" stroke="#a5447d" stroke-opacity=".5" stroke-width="1"/>
-    <path d="M200 453v10" stroke="#f6e9f1" stroke-width="2.2" stroke-linecap="round"/>
-    <path d="M194.5 456.5a8 8 0 1 0 11 0" fill="none" stroke="#f6e9f1" stroke-width="2.2" stroke-linecap="round"/>
-  </g>
+    <g transform="matrix(1.106851,0,0,1.106851,-21.387867,-35.075979)">
+        <path d="M86.061,438.527C86.648,451.703 87.969,465.735 92.688,483.73C102.602,503.416 134.117,514.189 151.929,523.007" style="fill:none;fill-rule:nonzero;stroke:rgb(183,174,156);stroke-opacity:0.18;stroke-width:8px;stroke-linecap:round;"/>
+    </g>
+    <g transform="matrix(1.106851,0,0,1.106851,-37.576624,-168.072063)">
+        <path d="M316,446L323.546,474.454C327.031,490.016 328.499,504.655 332.073,521.976" style="fill:none;fill-rule:nonzero;stroke:white;stroke-opacity:0.35;stroke-width:8px;stroke-linecap:round;"/>
+    </g>
+    <g transform="matrix(1.219256,0,0,0.900324,-43.868894,35.213119)">
+        <path d="M302.978,54C307.957,54 312,59.475 312,66.218L312,201.782C312,208.525 307.957,214 302.978,214L97.022,214C92.043,214 88,208.525 88,201.782L88,66.218C88,59.475 92.043,54 97.022,54L302.978,54Z" style="fill:url(#_Linear3);"/>
+        <path d="M301.259,59C304.427,59 307,62.484 307,66.775L307,201.225C307,205.516 304.427,209 301.259,209L98.741,209C95.573,209 93,205.516 93,201.225L93,66.775C93,62.484 95.573,59 98.741,59L301.259,59Z" style="fill:rgb(10,13,14);"/>
+        <path d="M299.899,62C302.162,62 304,64.488 304,67.554L304,200.446C304,203.512 302.162,206 299.899,206L100.101,206C97.838,206 96,203.512 96,200.446L96,67.554C96,64.488 97.838,62 100.101,62L299.899,62Z" style="fill:url(#_Linear4);"/>
+    </g>
+    <g transform="matrix(1.315048,0,0,0.842821,199.489279,251.241855)">
+        <text x="-50.669px" y="0px" style="font-family:'Arial-BoldMT', 'Arial', sans-serif;font-weight:700;font-size:21px;fill:rgb(216,211,198);stroke:white;stroke-opacity:0.55;stroke-width:0.6px;">S<tspan x="-35.718px -21.945px -15.166px 3.273px 18.224px 35.504px " y="0px 0px 0px 0px 0px 0px ">TIMPOD</tspan></text>
+    </g>
+    <g transform="matrix(0.616603,-0.919195,0.919195,0.616603,104.381311,285.296874)">
+        <text x="-13.347px" y="0px" style="font-family:'Arial-BoldMT', 'Arial', sans-serif;font-weight:700;font-size:9px;fill:rgb(141,134,119);">ME<tspan x="0.283px " y="0px ">N</tspan>U</text>
+    </g>
+    <g transform="matrix(0.618419,0.917975,-0.917975,0.618419,295.593874,282.904561)">
+        <text x="-15.381px" y="0px" style="font-family:'Arial-BoldMT', 'Arial', sans-serif;font-weight:700;font-size:9px;fill:rgb(141,134,119);">EN<tspan x="-2.749px 2.814px 8.881px " y="0px 0px 0px ">TER</tspan></text>
+    </g>
+    <g transform="matrix(0.874665,0,0,0.874665,19.515197,34.580001)">
+        <circle cx="124" cy="300" r="27" style="fill:rgb(59,13,41);"/>
+        <circle cx="124" cy="300" r="25" style="fill:url(#_Radial5);"/>
+        <circle cx="124" cy="300" r="25" style="fill:none;stroke:rgb(165,68,125);stroke-opacity:0.5;stroke-width:1px;"/>
+        <path d="M114,305L119,305L119,295L125,295L125,305L130,305L130,295L135,295L135,305L140,305" style="fill:none;fill-rule:nonzero;stroke:rgb(246,233,241);stroke-width:2.4px;stroke-linecap:round;stroke-linejoin:round;"/>
+    </g>
+    <g transform="matrix(0.874665,0,0,0.874665,30.583709,34.580001)">
+        <circle cx="276" cy="300" r="27" style="fill:rgb(59,13,41);"/>
+        <circle cx="276" cy="300" r="25" style="fill:url(#_Radial6);"/>
+        <circle cx="276" cy="300" r="25" style="fill:none;stroke:rgb(165,68,125);stroke-opacity:0.5;stroke-width:1px;"/>
+        <g transform="matrix(1,0,0,1,275.9575,307)">
+            <text x="-10.016px" y="0px" style="font-family:'Bahnschrift-Regular', 'Bahnschrift', sans-serif;font-size:17px;fill:rgb(246,233,241);">Hz</text>
+        </g>
+    </g>
+    <g transform="matrix(1.03604,0,0,1.03604,-7.225682,2.727614)">
+        <circle cx="200" cy="356" r="58" style="fill:rgb(111,117,119);fill-opacity:0;"/>
+        <circle cx="200" cy="356" r="56" style="fill:none;"/>
+        <circle cx="200" cy="356" r="56" style="fill:none;stroke:rgb(230,232,232);stroke-opacity:0.55;stroke-width:1.2px;"/>
+        <g transform="matrix(0.551148,0,0,0.551148,89.770489,159.79147)">
+            <circle cx="200" cy="356" r="42" style="fill:url(#_Radial7);"/>
+        </g>
+        <g transform="matrix(0.551148,0,0,0.551148,89.770489,159.79147)">
+            <circle cx="200" cy="356" r="42" style="fill:none;stroke:rgb(111,118,120);stroke-opacity:0.5;stroke-width:1px;"/>
+        </g>
+        <g transform="matrix(0.551148,0,0,0.551148,89.770489,159.79147)">
+            <path d="M200,316L195,323L205,323L200,316Z" style="fill:rgb(244,246,246);fill-rule:nonzero;"/>
+            <path d="M200,396L195,389L205,389L200,396Z" style="fill:rgb(244,246,246);fill-rule:nonzero;"/>
+            <path d="M160,356L167,351L167,361L160,356Z" style="fill:rgb(244,246,246);fill-rule:nonzero;"/>
+            <path d="M240,356L233,351L233,361L240,356Z" style="fill:rgb(244,246,246);fill-rule:nonzero;"/>
+        </g>
+    </g>
+    <g transform="matrix(1.106851,0,0,1.106851,199.89383,445.297454)">
+        <text x="-21.322px" y="0px" style="font-family:'Arial-BoldMT', 'Arial', sans-serif;font-weight:700;font-size:10px;fill:rgb(192,57,43);">N<tspan x="-13.941px -5.451px 1.379px 4.318px 10.039px 15.761px " y="0px 0px 0px 0px 0px 0px ">MS 460</tspan></text>
+    </g>
+    <g transform="matrix(1.106851,0,0,1.106851,-21.387867,-28.230924)">
+        <circle cx="200" cy="464" r="23" style="fill:rgb(59,13,41);"/>
+        <circle cx="200" cy="464" r="21" style="fill:url(#_Radial8);"/>
+        <circle cx="200" cy="464" r="21" style="fill:none;stroke:rgb(165,68,125);stroke-opacity:0.5;stroke-width:1px;"/>
+        <path d="M200,453L200,463" style="fill:none;fill-rule:nonzero;stroke:rgb(246,233,241);stroke-width:2.2px;stroke-linecap:round;"/>
+        <path d="M194.5,456.5C192.905,458.01 192,460.113 192,462.309C192,466.698 195.611,470.309 200,470.309C204.389,470.309 208,466.698 208,462.309C208,460.113 207.095,458.01 205.5,456.5" style="fill:none;fill-rule:nonzero;stroke:rgb(246,233,241);stroke-width:2.2px;stroke-linecap:round;"/>
+    </g>
+    <defs>
+        <image id="_Image1" width="322px" height="65px" xlink:href="data:image/png;base64,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"/>
+        <linearGradient id="_Linear2" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(229.216,546,-546,229.216,85.392,16)"><stop offset="0" style="stop-color:rgb(253,252,248);stop-opacity:1"/><stop offset="0.42" style="stop-color:rgb(242,239,231);stop-opacity:1"/><stop offset="1" style="stop-color:rgb(217,212,199);stop-opacity:1"/></linearGradient>
+        <linearGradient id="_Linear3" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(0,160,-160,0,88,54)"><stop offset="0" style="stop-color:rgb(59,64,67);stop-opacity:1"/><stop offset="1" style="stop-color:rgb(20,23,26);stop-opacity:1"/></linearGradient>
+        <linearGradient id="_Linear4" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(0,144,-144,0,96,62)"><stop offset="0" style="stop-color:rgb(10,13,14);stop-opacity:1"/><stop offset="1" style="stop-color:rgb(23,29,30);stop-opacity:1"/></linearGradient>
+        <radialGradient id="_Radial5" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(46,0,0,46,116,288)"><stop offset="0" style="stop-color:rgb(147,47,112);stop-opacity:1"/><stop offset="0.55" style="stop-color:rgb(107,28,80);stop-opacity:1"/><stop offset="1" style="stop-color:rgb(71,15,52);stop-opacity:1"/></radialGradient>
+        <radialGradient id="_Radial6" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(46,0,0,46,268,288)"><stop offset="0" style="stop-color:rgb(147,47,112);stop-opacity:1"/><stop offset="0.55" style="stop-color:rgb(107,28,80);stop-opacity:1"/><stop offset="1" style="stop-color:rgb(71,15,52);stop-opacity:1"/></radialGradient>
+        <radialGradient id="_Radial7" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(52.08,0,0,52.08,200,349.28)"><stop offset="0" style="stop-color:rgb(194,199,200);stop-opacity:1"/><stop offset="1" style="stop-color:rgb(139,145,147);stop-opacity:1"/></radialGradient>
+        <radialGradient id="_Radial8" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(38.64,0,0,38.64,193.28,453.92)"><stop offset="0" style="stop-color:rgb(147,47,112);stop-opacity:1"/><stop offset="0.55" style="stop-color:rgb(107,28,80);stop-opacity:1"/><stop offset="1" style="stop-color:rgb(71,15,52);stop-opacity:1"/></radialGradient>
+    </defs>
 </svg>

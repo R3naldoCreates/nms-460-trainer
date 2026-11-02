@@ -34,11 +34,11 @@ Open `assets/svg/device-body.svg` in any vector editor (Illustrator, Inkscape, A
 Leave these regions recognisable/free if you redraw the shell:
 
 - the LCD recess (the live screen draws over it);
-- the cable socket at the top;
-- the MENU and ENTER buttons;
+- the top edge where the cable socket straddles (y ≈ 53);
+- the MENU and ENTER buttons, and the gap between them for the LED;
 - the wheel centre;
 - the power button;
-- the space under the power button for the live ALGIAMED footer.
+- the space under the power button for the live ALGIAMED footer (y ≈ 534, on the dark inlay — the footer is drawn in a lighter grey when the artwork is loaded).
 
 XML comments cannot contain a double hyphen (`--`); use single dashes in your notes. The file is validated as XML so an invalid comment stops the whole SVG loading.
 
@@ -60,20 +60,22 @@ If the image is missing the simulator falls back to `assets/svg/device-body.svg`
 
 ## Overlay coordinates
 
-The device stage is a 400 × 600 viewBox. Interactive overlays are positioned by percentage, so your artwork must align with these boxes:
+The device stage is a 400 × 600 viewBox. Interactive overlays are positioned by percentage, so your artwork must align with these boxes. The figures below are measured from the **current** `device-body.svg`:
 
 | Element | Centre / box (400 × 600) | CSS |
 | --- | --- | --- |
-| LCD | x 96, y 62, 208 × 144 | `left:24%; top:10.3333%; width:52%; height:24%` |
-| Menu button | 124, 300 | `left:31%; top:50%` |
-| Enter / Hz button | 276, 300 | `left:69%; top:50%` |
-| Wheel | 200, 356, outer radius 56 | `left:50%; top:59.3333%; width:30%` |
-| Play / pause | 200, 356 | centre of wheel, 52 % of wheel |
-| Power button | 200, 464 | `left:50%; top:77.3333%` |
-| Cable socket | 200, 18 | `left:50%; top:3%` |
-| ALGIAMED footer | 200, 516 | inline SVG `text` in `index.html` |
+| LCD screen | x 73.2, y 91.0, 253.6 × 129.6 | `left:18.3%; top:15.1667%; width:63.4%; height:21.6%` |
+| Menu button | 128, 297 · Ø 47.2 | `left:32%; top:49.5%` |
+| Enter / Hz button | 272, 297 · Ø 47.2 | `left:68%; top:49.5%` |
+| Wheel | 200, 371.6 · outer Ø 120.2 | `left:50%; top:61.9333%; width:30%` |
+| Play / pause | 200, 371.6 | centre of wheel, 46 % of wheel |
+| Power button | 200, 485.3 · Ø 50.9 | `left:50%; top:80.8833%` |
+| Cable socket | 200, 52 (straddles the top edge at y 53) | inline SVG in `index.html` |
+| LED | 200, 288 (between MENU and ENTER) | inline SVG `rect` in `index.html` |
+| Wheel tick ring | 200, 371.6, radius 45 | inline SVG `#wheelRing`, origin in `wheel.js` |
+| ALGIAMED footer | 200, 534 | inline SVG `text` in `index.html` |
 
-If you move elements in the body artwork, adjust the matching CSS percentages in `assets/css/device.css`. The LCD itself uses CSS container queries (`cqw`), so its text scales with the screen box. Keep the cut-out close to 208:144 (13:9).
+If you move elements in the body artwork, adjust the matching CSS percentages in `assets/css/device.css` (and the inline coordinates listed above). The LCD itself uses CSS container queries (`cqw`), so its text scales with the screen box. **Keep the screen close to its current 253.6 × 129.6 (1.96:1)** — the LCD type is sized in `cqw`, so a very different aspect squashes the readout. If you change the screen size again, scale every `cqw` value inside the LCD section by `(newHeight / newWidth) / (129.6 / 253.6)`.
 
 ## Icons
 

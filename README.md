@@ -117,16 +117,18 @@ To use a photograph or high-fidelity render instead:
 
 If the file is missing, the simulator falls back to `assets/svg/device-body.svg`, then to the inline fallback, and shows a warning. The LCD icons are separate editable SVGs in `assets/svg/` too — see `assets/README.md`.
 
-The interactive hit areas and wheel do **not** move — they stay at the coordinates below. If your artwork has different proportions, either crop it to the same 400 × 600 frame or adjust the percentages in `assets/css/device.css`:
+The interactive hit areas and wheel sit at the coordinates below, measured from the current artwork. If your artwork has different proportions, either crop it to the same 400 × 600 frame or adjust the percentages in `assets/css/device.css`:
 
 | Control | Centre (viewBox) | CSS position |
 | --- | --- | --- |
-| LCD | 96, 62 → 208 × 144 | `left:24% top:10.3333% width:52% height:24%` |
-| Menu | 124, 300 | `left:31% top:50%` |
-| Enter | 276, 300 | `left:69% top:50%` |
-| Wheel | 200, 356 | `left:50% top:59.3333%` |
-| Power | 200, 464 | `left:50% top:77.3333%` |
-| Cable socket | 200, 18 | `left:50% top:3%` |
+| LCD | 73.2, 91.0 → 253.6 × 129.6 | `left:18.3% top:15.1667% width:63.4% height:21.6%` |
+| Menu | 128, 297 (Ø 47.2) | `left:32% top:49.5%` |
+| Enter | 272, 297 (Ø 47.2) | `left:68% top:49.5%` |
+| Wheel | 200, 371.6 (outer Ø 120.2) | `left:50% top:61.9333% width:30%` |
+| Power | 200, 485.3 (Ø 50.9) | `left:50% top:80.8833%` |
+| Cable socket | 200, 52 — straddles the top edge | inline SVG |
+
+Changing the screen size means rescaling every `cqw` value inside the LCD section of `device.css`; `assets/README.md` gives the formula.
 
 See `assets/README.md` for the full artwork checklist, icon notes and overlay coordinates.
 

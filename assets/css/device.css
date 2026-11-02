@@ -26,6 +26,11 @@
    shell but keep the live cable, socket, LED, wheel ring and branding */
 .device.has-art .device-static{ display:none; }
 
+/* the new body artwork carries a dark inlay under the power button, so the
+   configurable ALGIAMED footer needs lighter type to stay legible */
+.device.has-art .dev-brand{ fill:#c6cdd4; }
+.device.has-art .dev-brand2{ fill:#98a3ae; }
+
 /* ── printed wordmarks ─────────────────────────────────── */
 
 .dev-wordmark{
@@ -95,19 +100,21 @@
 
 .lcd{
   position:absolute;
-  left:24%;
-  top:10.3333%;
-  width:52%;
-  height:24%;
+  /* screen recess measured from assets/svg/device-body.svg:
+     x 73.2 - 326.8, y 91.0 - 220.6 in the 400 x 600 frame */
+  left:18.3%;
+  top:15.1667%;
+  width:63.4%;
+  height:21.6%;
   container-type:size;
   overflow:hidden;
-  border-radius:1.2cqw;
+  border-radius:0.89cqw;
   background:linear-gradient(175deg, #bed3cf 0%, #adc5c1 45%, #9db6b2 100%);
   color:var(--lcd-ink);
   font-family:var(--font-lcd);
   box-shadow:
-    inset 0 0.6cqw 1.6cqw rgba(0,0,0,.30),
-    inset 0 -0.4cqw 0.8cqw rgba(255,255,255,.18);
+    inset 0 0.44cqw 1.18cqw rgba(0,0,0,.30),
+    inset 0 -0.3cqw 0.59cqw rgba(255,255,255,.18);
   transition:opacity .35s var(--ease), filter .35s var(--ease);
   z-index:3;
 }
@@ -131,8 +138,8 @@
   display:grid;
   grid-template-columns:1fr 15.5%;
   grid-template-rows:auto 1fr auto;
-  padding:3cqw 3.6cqw 2.6cqw;
-  gap:.6cqw 0;
+  padding:2.22cqw 2.66cqw 1.92cqw;
+  gap:0.443cqw 0;
 }
 
 .lcd__top{
@@ -141,15 +148,15 @@
   display:flex;
   align-items:baseline;
   justify-content:space-between;
-  gap:2cqw;
+  gap:1.48cqw;
   line-height:.94;
 }
 
 .lcd__current{
   display:flex;
   align-items:baseline;
-  gap:.5cqw;
-  font-size:19.5cqw;
+  gap:0.369cqw;
+  font-size:14.4cqw;
   font-weight:700;
   letter-spacing:-.03em;
   font-variant-numeric:tabular-nums;
@@ -163,7 +170,7 @@
 }
 
 .lcd__timer{
-  font-size:16.4cqw;
+  font-size:12.11cqw;
   font-weight:700;
   letter-spacing:-.02em;
   font-variant-numeric:tabular-nums;
@@ -176,9 +183,9 @@
   flex-direction:column;
   justify-content:space-between;
   align-items:center;
-  padding:.4cqw 0 0;
+  padding:0.295cqw 0 0;
 }
-.lcd__icon{ display:block; width:11cqw; height:6.2cqw; opacity:.92; }
+.lcd__icon{ display:block; width:8.12cqw; height:4.58cqw; opacity:.92; }
 .lcd__icon svg,
 .lcd__icon img{ width:100%; height:100%; display:block; object-fit:contain; }
 .lcd__icon--dim{ opacity:.28; }
@@ -186,23 +193,23 @@
 .lcd__msg{
   grid-column:1;
   grid-row:2;
-  margin-top:.8cqw;
-  border:1cqw solid var(--lcd-ink);
-  border-radius:.4cqw;
+  margin-top:0.591cqw;
+  border:0.74cqw solid var(--lcd-ink);
+  border-radius:0.295cqw;
   display:grid;
   place-items:center;
   text-align:center;
-  font-size:8.6cqw;
+  font-size:6.35cqw;
   font-weight:700;
   line-height:1.08;
   letter-spacing:.015em;
-  padding:.8cqw 1cqw;
+  padding:0.591cqw 0.74cqw;
   text-transform:uppercase;
   overflow:hidden;
 }
-.lcd__msg.is-warn{ font-size:8.2cqw; }
-.lcd__msg.is-big{ font-size:9.6cqw; }
-.lcd__msg.is-tiny{ font-size:7cqw; letter-spacing:.02em; }
+.lcd__msg.is-warn{ font-size:6.05cqw; }
+.lcd__msg.is-big{ font-size:7.09cqw; }
+.lcd__msg.is-tiny{ font-size:5.17cqw; letter-spacing:.02em; }
 .lcd__msg.is-plain{ border-color:transparent; font-weight:600; }
 
 .lcd__warn{
@@ -221,19 +228,19 @@
   display:flex;
   align-items:flex-end;
   justify-content:space-between;
-  gap:2cqw;
-  margin-top:.8cqw;
+  gap:1.48cqw;
+  margin-top:0.591cqw;
 }
 
 .lcd__chip{
   background:var(--lcd-ink);
   color:#b7ccc8;
-  font-size:11.4cqw;
+  font-size:8.42cqw;
   font-weight:700;
   line-height:1;
   letter-spacing:-.01em;
-  padding:.9cqw 1.4cqw;
-  border-radius:.5cqw;
+  padding:0.665cqw 1.03cqw;
+  border-radius:0.369cqw;
   font-variant-numeric:tabular-nums;
   transition:opacity .2s;
 }
@@ -247,7 +254,7 @@
     linear-gradient(158deg, rgba(255,255,255,.22) 0%, rgba(255,255,255,.03) 34%, transparent 55%),
     repeating-linear-gradient(0deg, rgba(0,0,0,.028) 0 1px, transparent 1px 2px),
     repeating-linear-gradient(90deg, rgba(0,0,0,.018) 0 1px, transparent 1px 2px);
-  box-shadow:inset 0 0 0 .6cqw rgba(0,0,0,.16);
+  box-shadow:inset 0 0 0 0.443cqw rgba(0,0,0,.16);
   z-index:9;
 }
 
@@ -259,16 +266,16 @@
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  gap:.8cqw;
+  gap:0.591cqw;
   background:linear-gradient(175deg,#c3d7d3,#a8c0bc);
   z-index:8;
 }
-.boot__model{ font-size:13cqw; font-weight:800; letter-spacing:.08em; }
-.boot__ver{ font-size:6.4cqw; font-weight:600; letter-spacing:.14em; opacity:.72; }
+.boot__model{ font-size:9.6cqw; font-weight:800; letter-spacing:.08em; }
+.boot__ver{ font-size:4.73cqw; font-weight:600; letter-spacing:.14em; opacity:.72; }
 .boot__user{
   position:absolute;
-  bottom:7cqw;
-  font-size:5.6cqw;
+  bottom:5.17cqw;
+  font-size:4.14cqw;
   font-weight:600;
   letter-spacing:.04em;
   opacity:.8;
@@ -277,15 +284,15 @@
   white-space:pre-line;
 }
 .boot__logo{
-  font-size:11.5cqw;
+  font-size:8.49cqw;
   font-weight:800;
   letter-spacing:.24em;
   display:flex;
   align-items:center;
-  gap:1.6cqw;
+  gap:1.18cqw;
 }
 .boot__logo i{
-  width:2.6cqw; height:2.6cqw; border-radius:50%;
+  width:1.92cqw; height:1.92cqw; border-radius:50%;
   background:var(--lcd-ink); display:block;
 }
 
@@ -296,8 +303,8 @@
   inset:0;
   display:flex;
   flex-direction:column;
-  padding:2.6cqw 3.2cqw;
-  font-size:5.7cqw;
+  padding:1.92cqw 2.36cqw;
+  font-size:4.21cqw;
   font-weight:700;
   letter-spacing:.01em;
   line-height:1;
@@ -308,21 +315,21 @@
   background:var(--lcd-ink);
   color:#b7ccc8;
   text-align:center;
-  font-size:5.9cqw;
+  font-size:4.36cqw;
   letter-spacing:.09em;
-  padding:1.1cqw 0;
-  margin-bottom:1.4cqw;
+  padding:0.81cqw 0;
+  margin-bottom:1.03cqw;
   flex:none;
 }
 
-.menu__list{ flex:1; display:flex; flex-direction:column; justify-content:flex-start; gap:.2cqw; min-height:0; }
+.menu__list{ flex:1; display:flex; flex-direction:column; justify-content:flex-start; gap:0.148cqw; min-height:0; }
 
 .menu__row{
   display:flex;
   align-items:center;
-  gap:1.4cqw;
-  padding:.85cqw 1cqw;
-  border-radius:.5cqw;
+  gap:1.03cqw;
+  padding:0.628cqw 0.74cqw;
+  border-radius:0.369cqw;
   white-space:nowrap;
   overflow:hidden;
 }
@@ -330,21 +337,21 @@
   background:var(--lcd-ink);
   color:#b7ccc8;
 }
-.menu__row.is-long{ font-size:4.7cqw; letter-spacing:0; }
-.menu__row--exit{ margin-top:.6cqw; }
+.menu__row.is-long{ font-size:3.47cqw; letter-spacing:0; }
+.menu__row--exit{ margin-top:0.443cqw; }
 
 .menu__radio{
-  width:2.3cqw;
-  height:2.3cqw;
+  width:1.7cqw;
+  height:1.7cqw;
   border-radius:50%;
-  border:.62cqw solid currentColor;
+  border:0.458cqw solid currentColor;
   flex:none;
   position:relative;
 }
 .menu__radio.is-on::after{
   content:"";
   position:absolute;
-  inset:.34cqw;
+  inset:0.251cqw;
   border-radius:50%;
   background:currentColor;
 }
@@ -361,15 +368,15 @@
   flex:1;
   display:flex;
   flex-direction:column;
-  gap:.6cqw;
-  padding:1cqw 0;
-  font-size:5.5cqw;
+  gap:0.443cqw;
+  padding:0.74cqw 0;
+  font-size:4.06cqw;
 }
 .menu__confirm-label{ opacity:.8; letter-spacing:.04em; }
 .menu__confirm-value{
-  font-size:7.2cqw;
+  font-size:5.32cqw;
   letter-spacing:.02em;
-  padding:.6cqw 0 1.4cqw;
+  padding:0.443cqw 0 1.03cqw;
   line-height:1.1;
   white-space:pre-line;
 }
@@ -377,14 +384,14 @@
   margin-top:auto;
   display:flex;
   align-items:center;
-  gap:2.2cqw;
-  font-size:6cqw;
-  padding:.8cqw 1cqw;
-  border-radius:.5cqw;
+  gap:1.62cqw;
+  font-size:4.43cqw;
+  padding:0.591cqw 0.74cqw;
+  border-radius:0.369cqw;
 }
 .menu__accept .opt{
-  padding:.5cqw 1.6cqw;
-  border-radius:.4cqw;
+  padding:0.369cqw 1.18cqw;
+  border-radius:0.295cqw;
 }
 .menu__accept .opt.is-sel{
   background:var(--lcd-ink);
@@ -395,17 +402,17 @@
   flex:1;
   display:flex;
   flex-direction:column;
-  gap:1.2cqw;
-  padding:1cqw 0;
-  font-size:6.4cqw;
+  gap:0.89cqw;
+  padding:0.74cqw 0;
+  font-size:4.73cqw;
 }
 .menu__field{
   display:flex;
   align-items:baseline;
   justify-content:space-between;
-  gap:2cqw;
-  padding:1cqw 1.2cqw;
-  border-radius:.5cqw;
+  gap:1.48cqw;
+  padding:0.74cqw 0.89cqw;
+  border-radius:0.369cqw;
 }
 .menu__field.is-active{
   background:var(--lcd-ink);
@@ -414,7 +421,7 @@
 .menu__field b{ font-variant-numeric:tabular-nums; letter-spacing:.02em; }
 
 .menu__note{
-  font-size:4.4cqw;
+  font-size:3.25cqw;
   font-weight:600;
   letter-spacing:.03em;
   opacity:.75;
@@ -422,18 +429,18 @@
   line-height:1.25;
   display:flex;
   align-items:center;
-  gap:1cqw;
+  gap:0.74cqw;
 }
 
 /* user info editor */
 .menu__text{
   font-family:var(--font-mono);
-  font-size:6cqw;
+  font-size:4.43cqw;
   letter-spacing:.06em;
-  padding:1.4cqw 1.2cqw;
-  border:1cqw solid var(--lcd-ink);
-  border-radius:.4cqw;
-  margin-bottom:1cqw;
+  padding:1.03cqw 0.89cqw;
+  border:0.74cqw solid var(--lcd-ink);
+  border-radius:0.295cqw;
+  margin-bottom:0.74cqw;
   white-space:pre;
   overflow:hidden;
 }
@@ -443,19 +450,19 @@
 }
 .menu__charset{
   font-family:var(--font-mono);
-  font-size:4.6cqw;
+  font-size:3.4cqw;
   letter-spacing:.08em;
   display:flex;
   flex-wrap:wrap;
-  gap:.4cqw 1cqw;
-  padding:.6cqw 0;
+  gap:0.295cqw 0.74cqw;
+  padding:0.443cqw 0;
   opacity:.85;
 }
 .menu__charset span.is-sel{
   background:var(--lcd-ink);
   color:#b7ccc8;
-  padding:0 .4cqw;
-  border-radius:.3cqw;
+  padding:0 0.295cqw;
+  border-radius:0.222cqw;
 }
 .menu__charset span.is-special{ opacity:.72; }
 
@@ -485,9 +492,18 @@
 .dev-hit.is-pressed{ background:rgba(0,0,0,.10); }
 .dev-hit.is-pressed::after{ border-color:rgba(56,232,176,.5); }
 
-.dev-hit--menu{ left:31%;  top:50%;     width:14.5%; aspect-ratio:1; }
-.dev-hit--enter{ left:69%; top:50%;     width:14.5%; aspect-ratio:1; }
-.dev-hit--power{ left:50%; top:77.3333%; width:12.5%; aspect-ratio:1; }
+/* centres in the new artwork: menu 128,297 · enter 272,297 · power 200,485.3
+   (button diameters 47.2 and 50.9, hits kept slightly larger for touch) */
+.dev-hit--menu{ left:32%;  top:49.5%;     width:14.5%; aspect-ratio:1; }
+.dev-hit--enter{ left:68%; top:49.5%;     width:14.5%; aspect-ratio:1; }
+.dev-hit--power{ left:50%; top:80.8833%; width:14%; aspect-ratio:1; }
+
+/* The hit circles stay generous for touch, but the ring they draw must sit on
+   the artwork's button edge. Each inset below shrinks the ring from the hit box
+   down to the drawn diameter: menu/enter 47.2, power 50.9. */
+.dev-hit--menu::after,
+.dev-hit--enter::after{ inset:9.3%; }
+.dev-hit--power::after{ inset:4.6%; }
 
 .dev-socket-hit{
   position:absolute;
@@ -508,7 +524,8 @@
 .wheel{
   position:absolute;
   left:50%;
-  top:59.3333%;
+  /* wheel centre 200,371.6 · outer diameter 120.2 in the new artwork */
+  top:61.9333%;
   width:30%;
   aspect-ratio:1;
   transform:translate(-50%,-50%);
@@ -525,7 +542,9 @@
   position:absolute;
   left:50%;
   top:50%;
-  width:52%;
+  /* the new artwork's inner knob is only 48 wide (40 % of the wheel),
+     so the visual sits at 46 % instead of the old 52 % */
+  width:46%;
   aspect-ratio:1;
   transform:translate(-50%,-50%);
   border-radius:50%;
@@ -542,7 +561,8 @@
 .wheel__center::after{
   content:"";
   position:absolute;
-  inset:-14%;
+  /* ring sized to the 48-wide knob in the artwork, not the old -14% halo */
+  inset:6.5%;
   border-radius:50%;
   border:2px solid transparent;
   transition:.2s;
@@ -550,7 +570,7 @@
 .wheel__center:hover::after{ border-color:rgba(56,232,176,.4); }
 .wheel__center:active{ transform:translate(-50%,-50%) scale(.93); }
 
-.wheel__icon{ width:52%; height:52%; object-fit:contain; display:block; }
+.wheel__icon{ width:46%; height:46%; object-fit:contain; display:block; }
 .wheel__icon--pause{ display:none; }
 .device[data-stim="on"] .wheel__icon--play{ display:none; }
 .device[data-stim="on"] .wheel__icon--pause{ display:block; }

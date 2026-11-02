@@ -10,10 +10,10 @@
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<link rel="stylesheet" href="assets/css/base.css?v=7">
-<link rel="stylesheet" href="assets/css/device.css?v=7">
-<link rel="stylesheet" href="assets/css/panels.css?v=7">
-<link rel="stylesheet" href="assets/css/responsive.css?v=7">
+<link rel="stylesheet" href="assets/css/base.css?v=9">
+<link rel="stylesheet" href="assets/css/device.css?v=9">
+<link rel="stylesheet" href="assets/css/panels.css?v=9">
+<link rel="stylesheet" href="assets/css/responsive.css?v=9">
 </head>
 <body>
 
@@ -277,11 +277,11 @@
 
               <!-- cable, shown when inserted -->
               <g class="dev-cable" id="cablePlug" opacity="0">
-                <path d="M196 -120c0 60 4 90 4 132" fill="none" stroke="#1c4f47" stroke-width="9" stroke-linecap="round"/>
-                <path d="M196 -120c0 60 4 90 4 132" fill="none" stroke="#2f7d70" stroke-width="4" stroke-linecap="round" opacity=".65"/>
-                <rect x="182" y="-8" width="36" height="30" rx="7" fill="#2b3234"/>
-                <rect x="186" y="-3" width="28" height="9" rx="3" fill="#2f7d70"/>
-                <rect x="180" y="14" width="40" height="14" rx="4" fill="#3a4245"/>
+                <path d="M196 -120c0 60 4 90 4 166" fill="none" stroke="#1c4f47" stroke-width="9" stroke-linecap="round"/>
+                <path d="M196 -120c0 60 4 90 4 166" fill="none" stroke="#2f7d70" stroke-width="4" stroke-linecap="round" opacity=".65"/>
+                <rect x="182" y="26" width="36" height="24" rx="7" fill="#2b3234"/>
+                <rect x="186" y="30" width="28" height="9" rx="3" fill="#2f7d70"/>
+                <rect x="180" y="42" width="40" height="12" rx="4" fill="#3a4245"/>
               </g>
 
               <!-- -----------------------------------------------------
@@ -308,11 +308,12 @@
               <path class="device-static" d="M84 446L78 476Q72 492 62 506" fill="none" stroke="#b7ae9c" stroke-width="8" stroke-opacity=".18" stroke-linecap="round"/>
               <path class="device-static" d="M316 446L322 476Q328 492 338 506" fill="none" stroke="#ffffff" stroke-width="8" stroke-opacity=".35" stroke-linecap="round"/>
 
-              <!-- cable socket -->
+              <!-- cable socket: the new artwork has a flat top edge at y 53,
+                   so the connector straddles it -->
               <g class="dev-socket" id="cableSocket" tabindex="0" role="button" aria-label="Insert treatment cable">
-                <rect x="176" y="8" width="48" height="20" rx="7" fill="#e6e2d8" stroke="#c3bcac" stroke-width="1"/>
-                <rect x="186" y="12" width="28" height="9" rx="4" fill="#202628"/>
-                <rect x="188" y="14" width="24" height="5" rx="2.5" fill="#0a0d0e"/>
+                <rect x="178" y="42" width="44" height="20" rx="7" fill="#e6e2d8" stroke="#c3bcac" stroke-width="1"/>
+                <rect x="188" y="46" width="24" height="10" rx="4" fill="#202628"/>
+                <rect x="190" y="48" width="20" height="6" rx="3" fill="#0a0d0e"/>
               </g>
 
               <!-- LCD -->
@@ -325,11 +326,11 @@
               <!-- wordmark -->
               <text class="dev-wordmark device-static" x="200" y="238" text-anchor="middle" font-size="21" letter-spacing="4.5">STIMPOD</text>
 
-              <!-- LED -->
+              <!-- LED: sits between the MENU and ENTER buttons in the new layout -->
               <g class="dev-led" id="ledWrap">
-                <rect x="184" y="262" width="32" height="7" rx="3.5" fill="#2c3230"/>
-                <rect id="led" x="186" y="264" width="28" height="3" rx="1.5" fill="#1d2a24"/>
-                <rect id="ledGlow" x="186" y="264" width="28" height="3" rx="1.5" fill="#3dff9e" opacity="0" filter="url(#fLedGlow)"/>
+                <rect x="184" y="284.5" width="32" height="7" rx="3.5" fill="#2c3230"/>
+                <rect id="led" x="186" y="286.5" width="28" height="3" rx="1.5" fill="#1d2a24"/>
+                <rect id="ledGlow" x="186" y="286.5" width="28" height="3" rx="1.5" fill="#3dff9e" opacity="0" filter="url(#fLedGlow)"/>
               </g>
 
               <!-- labels -->
@@ -362,13 +363,13 @@
                 <circle class="device-static" cx="200" cy="356" r="42" fill="url(#gWheelIn)"/>
                 <circle class="device-static" cx="200" cy="356" r="42" fill="none" stroke="#6f7678" stroke-opacity=".5" stroke-width="1"/>
 
-                <!-- rotating tick ring -->
+                <!-- rotating tick ring: centred on the new wheel at 200,371.6 -->
                 <g id="wheelRing" class="dev-wheel__ring">
                   <g fill="#f2f4f4">
-                    <circle cx="200" cy="311" r="2.6"/><circle cx="200" cy="401" r="2.6"/>
-                    <circle cx="155" cy="356" r="2.6"/><circle cx="245" cy="356" r="2.6"/>
-                    <circle cx="168" cy="324" r="2.2"/><circle cx="232" cy="324" r="2.2"/>
-                    <circle cx="168" cy="388" r="2.2"/><circle cx="232" cy="388" r="2.2"/>
+                    <circle cx="200" cy="326.6" r="2.6"/><circle cx="200" cy="416.6" r="2.6"/>
+                    <circle cx="155" cy="371.6" r="2.6"/><circle cx="245" cy="371.6" r="2.6"/>
+                    <circle cx="168" cy="339.6" r="2.2"/><circle cx="232" cy="339.6" r="2.2"/>
+                    <circle cx="168" cy="403.6" r="2.2"/><circle cx="232" cy="403.6" r="2.2"/>
                   </g>
                 </g>
 
@@ -394,8 +395,8 @@
               </g>
 
               <!-- brand -->
-              <text class="dev-brand" x="200" y="516" text-anchor="middle" font-size="12" letter-spacing="1.4" data-brand="deviceFooter">ALGIAMED</text>
-              <text class="dev-brand2" x="200" y="526" text-anchor="middle" font-size="4.6" letter-spacing="2.6" data-brand="deviceFooterSub">TECHNOLOGIES</text>
+              <text class="dev-brand" x="200" y="534" text-anchor="middle" font-size="12" letter-spacing="1.4" data-brand="deviceFooter">ALGIAMED</text>
+              <text class="dev-brand2" x="200" y="544" text-anchor="middle" font-size="4.6" letter-spacing="2.6" data-brand="deviceFooterSub">TECHNOLOGIES</text>
             </svg>
 
             <!-- LCD (HTML overlay) -->
@@ -634,14 +635,14 @@
   </div>
 </div>
 
-<script src="assets/js/config.js?v=7"></script>
-<script src="assets/js/core.js?v=7"></script>
-<script src="assets/js/audio.js?v=7"></script>
-<script src="assets/js/patient.js?v=7"></script>
-<script src="assets/js/device.js?v=7"></script>
-<script src="assets/js/wheel.js?v=7"></script>
-<script src="assets/js/tutorial.js?v=7"></script>
-<script src="assets/js/guide.js?v=7"></script>
-<script src="assets/js/app.js?v=7"></script>
+<script src="assets/js/config.js?v=9"></script>
+<script src="assets/js/core.js?v=9"></script>
+<script src="assets/js/audio.js?v=9"></script>
+<script src="assets/js/patient.js?v=9"></script>
+<script src="assets/js/device.js?v=9"></script>
+<script src="assets/js/wheel.js?v=9"></script>
+<script src="assets/js/tutorial.js?v=9"></script>
+<script src="assets/js/guide.js?v=9"></script>
+<script src="assets/js/app.js?v=9"></script>
 </body>
 </html>
