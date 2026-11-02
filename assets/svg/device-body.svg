@@ -1,0 +1,162 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600" width="400" height="600">
+  <!-- ============================================================
+       NMS 460 front-body artwork  ·  400 × 600 viewBox
+
+       EDIT THIS FILE to change the device shell, buttons, wheel,
+       labels, wordmark or printed model number.
+
+       The simulator overlays the live LCD, cable socket, LED, wheel
+       tick ring and the configurable ALGIAMED footer on top of this
+       image, so leave those areas free if you redraw the body.
+
+       To use a photograph or raster render instead, set
+         NMS.config.device.art = { enabled:true, src:'assets/img/...' }
+       in assets/js/config.js. Keep the same 2:3 proportions and the
+       screen area empty/transparent so the LCD shows through.
+
+       Note: XML comments cannot contain a double hyphen, so use
+       single dashes or equals signs in your own notes.
+       ============================================================ -->
+
+  <defs>
+    <linearGradient id="gBody" x1=".12" y1="0" x2=".88" y2="1">
+      <stop offset="0" stop-color="#fdfcf8"/>
+      <stop offset=".42" stop-color="#f2efe7"/>
+      <stop offset="1" stop-color="#d9d4c7"/>
+    </linearGradient>
+    <linearGradient id="gBodyRim" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity=".95"/>
+      <stop offset=".55" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#a89f8d" stop-opacity=".55"/>
+    </linearGradient>
+    <linearGradient id="gBezel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3b4043"/>
+      <stop offset="1" stop-color="#14171a"/>
+    </linearGradient>
+    <linearGradient id="gRecess" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0a0d0e"/>
+      <stop offset="1" stop-color="#171d1e"/>
+    </linearGradient>
+    <radialGradient id="gBtn" cx=".34" cy=".26" r=".92">
+      <stop offset="0" stop-color="#932f70"/>
+      <stop offset=".55" stop-color="#6b1c50"/>
+      <stop offset="1" stop-color="#470f34"/>
+    </radialGradient>
+    <linearGradient id="gWheel" x1=".18" y1="0" x2=".82" y2="1">
+      <stop offset="0" stop-color="#c9cdce"/>
+      <stop offset=".48" stop-color="#9aa0a2"/>
+      <stop offset="1" stop-color="#767c7e"/>
+    </linearGradient>
+    <radialGradient id="gWheelIn" cx=".5" cy=".42" r=".62">
+      <stop offset="0" stop-color="#c2c7c8"/>
+      <stop offset="1" stop-color="#8b9193"/>
+    </radialGradient>
+    <filter id="fBlur" x="-40%" y="-80%" width="180%" height="260%">
+      <feGaussianBlur stdDeviation="9"/>
+    </filter>
+    <filter id="fSoftShadow" x="-25%" y="-15%" width="150%" height="135%">
+      <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#000" flood-opacity=".5"/>
+    </filter>
+  </defs>
+
+  <style>
+    .wordmark{
+      font-family:"Inter","Segoe UI",Arial,sans-serif;
+      font-weight:700;
+      fill:#d8d3c6;
+      paint-order:stroke;
+      stroke:#ffffff;
+      stroke-width:.6;
+      stroke-opacity:.55;
+      letter-spacing:4.5px;
+    }
+    .model{
+      font-family:"Inter","Segoe UI",Arial,sans-serif;
+      font-weight:800;
+      fill:#c0392b;
+      letter-spacing:1.6px;
+    }
+    .label{
+      font-family:"Inter","Segoe UI",Arial,sans-serif;
+      font-weight:600;
+      fill:#8d8677;
+      letter-spacing:.06em;
+    }
+  </style>
+
+  <!-- ground shadow -->
+  <ellipse cx="200" cy="562" rx="128" ry="15" fill="#000" opacity=".55" filter="url(#fBlur)"/>
+
+  <!-- body shell -->
+  <g filter="url(#fSoftShadow)">
+    <path class="dev-body" d="M78 34Q78 16 96 16L304 16Q322 16 322 34L350 244Q354 270 338 288L324 306Q316 316 316 330L316 446Q316 462 322 476L346 514Q356 536 336 544L300 552Q250 562 200 562Q150 562 100 552L64 544Q44 536 54 514L78 476Q84 462 84 446L84 330Q84 316 76 306L62 288Q46 270 50 244Z"
+          fill="url(#gBody)" stroke="#cfc9bb" stroke-width="1"/>
+  </g>
+  <path d="M78 34Q78 16 96 16L304 16Q322 16 322 34L350 244Q354 270 338 288L324 306Q316 316 316 330L316 446Q316 462 322 476L346 514Q356 536 336 544L300 552Q250 562 200 562Q150 562 100 552L64 544Q44 536 54 514L78 476Q84 462 84 446L84 330Q84 316 76 306L62 288Q46 270 50 244Z"
+        fill="none" stroke="url(#gBodyRim)" stroke-width="2.4" stroke-opacity=".85"/>
+
+  <!-- soft side shading -->
+  <path d="M84 446L78 476Q72 492 62 506" fill="none" stroke="#b7ae9c" stroke-width="8" stroke-opacity=".18" stroke-linecap="round"/>
+  <path d="M316 446L322 476Q328 492 338 506" fill="none" stroke="#ffffff" stroke-width="8" stroke-opacity=".35" stroke-linecap="round"/>
+
+  <!-- LCD bezel and recess (the live screen is an HTML overlay) -->
+  <g class="dev-lcd-frame">
+    <rect x="88" y="54" width="224" height="160" rx="11" fill="url(#gBezel)"/>
+    <rect x="93" y="59" width="214" height="150" rx="7" fill="#0a0d0e"/>
+    <rect x="96" y="62" width="208" height="144" rx="5" fill="url(#gRecess)"/>
+  </g>
+
+  <!-- printed wordmark -->
+  <text class="wordmark" x="200" y="238" text-anchor="middle" font-size="21">STIMPOD</text>
+
+  <!-- button labels -->
+  <text class="label" x="96" y="272" text-anchor="middle" font-size="9">MENU</text>
+  <text class="label" x="304" y="272" text-anchor="middle" font-size="9">ENTER</text>
+
+  <!-- menu button -->
+  <g class="dev-btn">
+    <circle cx="124" cy="300" r="27" fill="#3b0d29"/>
+    <circle cx="124" cy="300" r="25" fill="url(#gBtn)"/>
+    <circle cx="124" cy="300" r="25" fill="none" stroke="#a5447d" stroke-opacity=".5" stroke-width="1"/>
+    <path d="M114 305h5v-10h6v10h5v-10h5v10h5" fill="none" stroke="#f6e9f1" stroke-width="2.4"
+          stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- enter button -->
+  <g class="dev-btn">
+    <circle cx="276" cy="300" r="27" fill="#3b0d29"/>
+    <circle cx="276" cy="300" r="25" fill="url(#gBtn)"/>
+    <circle cx="276" cy="300" r="25" fill="none" stroke="#a5447d" stroke-opacity=".5" stroke-width="1"/>
+    <text x="276" y="307" text-anchor="middle" font-family="Bahnschrift, 'DIN Alternate', Arial, sans-serif"
+          font-size="17" font-weight="600" fill="#f6e9f1" letter-spacing=".5">Hz</text>
+  </g>
+
+  <!-- wheel base (the rotating tick ring is overlaid by index.html) -->
+  <g class="dev-wheel">
+    <circle cx="200" cy="356" r="58" fill="#6f7577" opacity=".55"/>
+    <circle cx="200" cy="356" r="56" fill="url(#gWheel)"/>
+    <circle cx="200" cy="356" r="56" fill="none" stroke="#e6e8e8" stroke-opacity=".55" stroke-width="1.2"/>
+    <circle cx="200" cy="356" r="42" fill="url(#gWheelIn)"/>
+    <circle cx="200" cy="356" r="42" fill="none" stroke="#6f7678" stroke-opacity=".5" stroke-width="1"/>
+
+    <!-- chevrons -->
+    <g fill="#f4f6f6">
+      <path d="M200 316l-5 7h10z"/>
+      <path d="M200 396l-5-7h10z"/>
+      <path d="M160 356l7-5v10z"/>
+      <path d="M240 356l-7-5v10z"/>
+    </g>
+  </g>
+
+  <!-- printed model number -->
+  <text class="model" x="200" y="434" text-anchor="middle" font-size="10">NMS 460</text>
+
+  <!-- power button -->
+  <g class="dev-btn">
+    <circle cx="200" cy="464" r="23" fill="#3b0d29"/>
+    <circle cx="200" cy="464" r="21" fill="url(#gBtn)"/>
+    <circle cx="200" cy="464" r="21" fill="none" stroke="#a5447d" stroke-opacity=".5" stroke-width="1"/>
+    <path d="M200 453v10" stroke="#f6e9f1" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M194.5 456.5a8 8 0 1 0 11 0" fill="none" stroke="#f6e9f1" stroke-width="2.2" stroke-linecap="round"/>
+  </g>
+</svg>

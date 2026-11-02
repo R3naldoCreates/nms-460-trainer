@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 46 24" width="46" height="24">
+  <!-- NMS 460 LCD icon · hybrid stimulation mode.
+       Edit this file to change the icon. Keep the 46 × 24 proportions
+       (or update the viewBox) and leave a little padding at the edges. -->
+  <g fill="none" stroke="#0d1a19">
+    <!-- square pulse train -->
+    <path d="M1 21h5v-9h5v9h5v-9h5v9h5v-9h5v9h5v-9h5"
+          stroke-width="2.2" stroke-linejoin="round"/>
+    <!-- superimposed sine component -->
+    <path d="M1 7c3.5 0 3.5-4 7-4s3.5 4 7 4 3.5-4 7-4 3.5 4 7 4 3.5-4 7-4 3.5 4 7 4"
+          stroke-width="1.5" opacity=".5"/>
+  </g>
+</svg>

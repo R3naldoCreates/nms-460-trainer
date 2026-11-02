@@ -1,0 +1,9 @@
+﻿# build output, dev scratch
+dist/
+_research/
+*.zip
+
+# OS / editor
+Thumbs.db
+desktop.ini
+.DS_Store

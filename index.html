@@ -1,0 +1,633 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#070a09">
+<title>ALGIAMED NMS 460 — Training Simulator</title>
+<meta name="description" content="Interactive practice simulator for the Algiamed NMS 460 peripheral nerve stimulator. Learn the menus, screens, wheel and treatment workflow.">
+<link rel="icon" href="assets/img/icon.svg" type="image/svg+xml">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="stylesheet" href="assets/css/base.css?v=6">
+<link rel="stylesheet" href="assets/css/device.css?v=6">
+<link rel="stylesheet" href="assets/css/panels.css?v=6">
+<link rel="stylesheet" href="assets/css/responsive.css?v=6">
+</head>
+<body>
+
+<div class="app">
+
+  <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• TOP BAR â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+  <header class="topbar">
+    <a class="brand" href="#" data-view="sim" aria-label="Algiamed NMS 460 training simulator home">
+      <span class="brand__mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="none">
+          <rect x="1" y="1" width="30" height="30" rx="9" stroke="currentColor" stroke-opacity=".35"/>
+          <path d="M6 20h4l2.5-9 4 14 3-9 2 4h4.5" stroke="currentColor" stroke-width="2.1"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <span class="brand__text">
+        <span class="brand__name" data-brand="name">ALGIAMED<span class="brand__reg" data-brand="model">NMS 460</span></span>
+        <span class="brand__sub">Training Simulator</span>
+      </span>
+    </a>
+
+    <nav class="topnav" aria-label="Primary">
+      <button class="topnav__btn is-active" data-view="sim">Simulator</button>
+      <button class="topnav__btn" data-view="guide">Reference</button>
+    </nav>
+
+    <div class="topbar__right">
+      <div class="patient-chip" id="patientChip">
+        <span class="patient-chip__dot"></span>
+        <span id="patientChipName">Jordan D.</span>
+      </div>
+      <button class="icon-btn" id="btnSound" aria-pressed="true" title="Sound on / off" aria-label="Toggle sound">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M4 9v6h3.5L13 19V5L7.5 9H4Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+          <path class="icon-btn__wave" d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"
+                stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          <path class="icon-btn__slash" d="M16 8l6 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <button class="icon-btn" id="btnAbout" title="About this simulator" aria-label="About this simulator">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/>
+          <path d="M12 11v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <circle cx="12" cy="7.6" r="1.15" fill="currentColor"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• SIMULATOR â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+    <section class="view is-active" id="view-sim">
+      <div class="sim" id="sim">
+
+        <!-- â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ LEFT RAIL â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+        <aside class="rail rail--left" id="railLeft">
+
+          <!-- Patient -->
+          <section class="card">
+            <header class="card__head">
+              <h2 class="card__title">Patient</h2>
+              <button class="btn btn--ghost btn--xs" id="btnNewPatient">New patient</button>
+            </header>
+
+            <div class="patient">
+              <div class="patient__avatar" id="patientAvatar">JD</div>
+              <div class="patient__id">
+                <div class="patient__name" id="patientName">Jordan D.</div>
+                <div class="patient__meta" id="patientMeta">42 y · Chronic lumbar radiculopathy</div>
+              </div>
+            </div>
+
+            <dl class="kv">
+              <div class="kv__row"><dt>Treatment site</dt><dd id="patientSite">Left L5 distribution</dd></div>
+              <div class="kv__row"><dt>Skin impedance</dt><dd id="patientZ">—</dd></div>
+              <div class="kv__row"><dt>Session</dt><dd id="patientSession">Not started</dd></div>
+            </dl>
+
+            <label class="switch">
+              <input type="checkbox" id="chkReveal">
+              <span class="switch__track"><span class="switch__thumb"></span></span>
+              <span class="switch__label">Reveal tolerance <span class="muted">(trainer)</span></span>
+            </label>
+
+            <div class="reveal" id="revealBox" hidden>
+              <div class="reveal__row"><span>Comfort ceiling</span><strong id="revealTolerance">—</strong></div>
+              <div class="reveal__row"><span>Fasciculation onset</span><strong id="revealFasc">—</strong></div>
+              <p class="reveal__note">0.1&nbsp;ms equivalent. At 0.2&nbsp;ms the same current delivers twice the charge, so the ceiling halves.</p>
+            </div>
+          </section>
+
+          <!-- Procedure -->
+          <section class="card">
+            <header class="card__head">
+              <h2 class="card__title">Procedure</h2>
+              <span class="pill" id="procPill">Setup</span>
+            </header>
+
+            <div class="proc-actions">
+              <button class="proc-btn" id="btnElectrode" data-hint="electrode">
+                <span class="proc-btn__num">1</span>
+                <span class="proc-btn__label">Place electrode</span>
+                <span class="proc-btn__state" id="stateElectrode">Not placed</span>
+              </button>
+              <button class="proc-btn" id="btnGel" data-hint="gel">
+                <span class="proc-btn__num">2</span>
+                <span class="proc-btn__label">Apply gel</span>
+                <span class="proc-btn__state" id="stateGel">Dry</span>
+              </button>
+              <button class="proc-btn" id="btnProbe" data-hint="probe">
+                <span class="proc-btn__num">3</span>
+                <span class="proc-btn__label">Place probe</span>
+                <span class="proc-btn__state" id="stateProbe">Off skin</span>
+              </button>
+            </div>
+
+            <!-- Fasciculation visual -->
+            <div class="fasc" id="fasc">
+              <svg class="fasc__svg" viewBox="0 0 220 210" aria-hidden="true">
+                <defs>
+                  <linearGradient id="gSkin" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0" stop-color="#2b3a36"/>
+                    <stop offset="1" stop-color="#18211f"/>
+                  </linearGradient>
+                  <linearGradient id="gMuscle" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#3d5a51"/>
+                    <stop offset="1" stop-color="#243631"/>
+                  </linearGradient>
+                  <radialGradient id="gSpark" cx=".5" cy=".5" r=".5">
+                    <stop offset="0" stop-color="#57ffc6" stop-opacity=".9"/>
+                    <stop offset="1" stop-color="#57ffc6" stop-opacity="0"/>
+                  </radialGradient>
+                </defs>
+
+                <!-- contralateral reference pad -->
+                <g class="fasc__ref" id="fascRef">
+                  <rect x="14" y="18" width="46" height="30" rx="7" fill="#1d2a27" stroke="#3d5a51"/>
+                  <rect x="21" y="25" width="32" height="16" rx="4" fill="#57ffc6" opacity=".18"/>
+                  <text x="37" y="60" text-anchor="middle" fill="#7d968e" font-size="7.5" letter-spacing=".08em">REF</text>
+                </g>
+
+                <!-- forearm -->
+                <g class="fasc__arm" id="fascArm">
+                  <path class="fasc__limb" d="M96 30c-16 0-27 12-29 28l-5 44c-2 20 4 34 14 44l12 12c8 8 22 8 30 0l10-10c10-10 15-24 13-44l-6-46c-2-16-13-28-29-28Z"
+                        fill="url(#gSkin)" stroke="#43625a" stroke-width="1.2"/>
+                  <!-- nerve -->
+                  <path class="fasc__nerve" d="M110 44c-6 18-4 36 0 54s4 36-2 54" fill="none"
+                        stroke="#57ffc6" stroke-opacity=".45" stroke-width="1.6" stroke-dasharray="3 3"/>
+                  <!-- muscle bands -->
+                  <g class="fasc__bands" id="fascBands">
+                    <ellipse class="band" cx="100" cy="82" rx="26" ry="7" fill="url(#gMuscle)"/>
+                    <ellipse class="band" cx="102" cy="104" rx="27" ry="7" fill="url(#gMuscle)"/>
+                    <ellipse class="band" cx="103" cy="126" rx="26" ry="7" fill="url(#gMuscle)"/>
+                    <ellipse class="band" cx="101" cy="148" rx="24" ry="7" fill="url(#gMuscle)"/>
+                  </g>
+                  <!-- probe -->
+                  <g class="fasc__probe" id="fascProbe">
+                    <circle class="fasc__ripple" id="ripple1" cx="104" cy="116" r="8" fill="none" stroke="#57ffc6" stroke-width="1.4" opacity="0"/>
+                    <circle class="fasc__ripple" id="ripple2" cx="104" cy="116" r="8" fill="none" stroke="#57ffc6" stroke-width="1.4" opacity="0"/>
+                    <circle class="fasc__spark" id="fascSpark" cx="104" cy="116" r="26" fill="url(#gSpark)" opacity="0"/>
+                    <circle cx="104" cy="116" r="6.5" fill="#0c1211" stroke="#8fb3a8" stroke-width="1.4"/>
+                    <circle cx="104" cy="116" r="2.6" fill="#57ffc6" opacity=".9"/>
+                  </g>
+                  <!-- hand -->
+                  <path d="M92 178c-4 8-4 16 2 22 5 5 14 5 19 0 5-5 6-14 3-22" fill="url(#gSkin)" stroke="#43625a" stroke-width="1.2"/>
+                </g>
+
+                <text x="176" y="120" text-anchor="middle" fill="#5f756e" font-size="7" letter-spacing=".14em" transform="rotate(90 176 120)">TREATMENT SITE</text>
+              </svg>
+
+              <div class="fasc__meta">
+                <div class="fasc__label">Fasciculation</div>
+                <div class="fasc__value" id="fascValue">None</div>
+                <div class="fasc__bars" id="fascBars" aria-hidden="true">
+                  <span></span><span></span><span></span><span></span><span></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="badges">
+              <span class="badge" id="badgeCircuit"><i></i>Circuit open</span>
+              <span class="badge" id="badgeContact"><i></i>Probe off skin</span>
+            </div>
+          </section>
+        </aside>
+
+        <!-- â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ CENTRE STAGE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+        <div class="stage">
+          <div class="stage__glow" aria-hidden="true"></div>
+
+          <!-- THE DEVICE -->
+          <div class="device" id="device" data-power="off" data-hint="device">
+
+            <svg class="device__svg" id="deviceSvg" viewBox="0 0 400 600" aria-hidden="true">
+              <defs>
+                <linearGradient id="gBody" x1=".12" y1="0" x2=".88" y2="1">
+                  <stop offset="0" stop-color="#fdfcf8"/>
+                  <stop offset=".42" stop-color="#f2efe7"/>
+                  <stop offset="1" stop-color="#d9d4c7"/>
+                </linearGradient>
+                <linearGradient id="gBodyRim" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#ffffff" stop-opacity=".95"/>
+                  <stop offset=".55" stop-color="#ffffff" stop-opacity="0"/>
+                  <stop offset="1" stop-color="#a89f8d" stop-opacity=".55"/>
+                </linearGradient>
+                <linearGradient id="gBezel" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#3b4043"/>
+                  <stop offset="1" stop-color="#14171a"/>
+                </linearGradient>
+                <linearGradient id="gRecess" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#0a0d0e"/>
+                  <stop offset="1" stop-color="#171d1e"/>
+                </linearGradient>
+                <radialGradient id="gBtn" cx=".34" cy=".26" r=".92">
+                  <stop offset="0" stop-color="#932f70"/>
+                  <stop offset=".55" stop-color="#6b1c50"/>
+                  <stop offset="1" stop-color="#470f34"/>
+                </radialGradient>
+                <linearGradient id="gWheel" x1=".18" y1="0" x2=".82" y2="1">
+                  <stop offset="0" stop-color="#c9cdce"/>
+                  <stop offset=".48" stop-color="#9aa0a2"/>
+                  <stop offset="1" stop-color="#767c7e"/>
+                </linearGradient>
+                <radialGradient id="gWheelIn" cx=".5" cy=".42" r=".62">
+                  <stop offset="0" stop-color="#c2c7c8"/>
+                  <stop offset="1" stop-color="#8b9193"/>
+                </radialGradient>
+                <radialGradient id="gLed" cx=".5" cy=".5" r=".5">
+                  <stop offset="0" stop-color="#c6ffd9"/>
+                  <stop offset=".45" stop-color="#3dff9e"/>
+                  <stop offset="1" stop-color="#0f8f52"/>
+                </radialGradient>
+                <filter id="fBlur" x="-40%" y="-80%" width="180%" height="260%">
+                  <feGaussianBlur stdDeviation="9"/>
+                </filter>
+                <filter id="fSoftShadow" x="-25%" y="-15%" width="150%" height="135%">
+                  <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#000" flood-opacity=".5"/>
+                </filter>
+                <filter id="fLedGlow" x="-300%" y="-300%" width="700%" height="700%">
+                  <feGaussianBlur stdDeviation="4"/>
+                </filter>
+              </defs>
+
+              <!-- ground shadow -->
+              <ellipse class="device-static" cx="200" cy="562" rx="128" ry="15" fill="#000" opacity=".55" filter="url(#fBlur)"/>
+
+              <!-- cable, shown when inserted -->
+              <g class="dev-cable" id="cablePlug" opacity="0">
+                <path d="M196 -120c0 60 4 90 4 132" fill="none" stroke="#1c4f47" stroke-width="9" stroke-linecap="round"/>
+                <path d="M196 -120c0 60 4 90 4 132" fill="none" stroke="#2f7d70" stroke-width="4" stroke-linecap="round" opacity=".65"/>
+                <rect x="182" y="-8" width="36" height="30" rx="7" fill="#2b3234"/>
+                <rect x="186" y="-3" width="28" height="9" rx="3" fill="#2f7d70"/>
+                <rect x="180" y="14" width="40" height="14" rx="4" fill="#3a4245"/>
+              </g>
+
+              <!-- â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+                   EDITABLE BODY ARTWORK
+                   The default is assets/svg/device-body.svg. Replace
+                   that file — or point config.device.art at a PNG /
+                   WebP render — and the shell changes without touching
+                   the live overlays. The inline artwork below is only
+                   a fallback if the file cannot be loaded.
+                   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+              <image id="deviceBodyArt" href="assets/svg/device-body.svg"
+                     x="0" y="0" width="400" height="600"
+                     preserveAspectRatio="xMidYMid meet" pointer-events="none"/>
+
+              <!-- body (fallback copy — hidden when device art loads) -->
+              <g class="device-static" filter="url(#fSoftShadow)">
+                <path class="dev-body" d="M78 34Q78 16 96 16L304 16Q322 16 322 34L350 244Q354 270 338 288L324 306Q316 316 316 330L316 446Q316 462 322 476L346 514Q356 536 336 544L300 552Q250 562 200 562Q150 562 100 552L64 544Q44 536 54 514L78 476Q84 462 84 446L84 330Q84 316 76 306L62 288Q46 270 50 244Z"
+                      fill="url(#gBody)" stroke="#cfc9bb" stroke-width="1"/>
+              </g>
+              <path d="M78 34Q78 16 96 16L304 16Q322 16 322 34L350 244Q354 270 338 288L324 306Q316 316 316 330L316 446Q316 462 322 476L346 514Q356 536 336 544L300 552Q250 562 200 562Q150 562 100 552L64 544Q44 536 54 514L78 476Q84 462 84 446L84 330Q84 316 76 306L62 288Q46 270 50 244Z"
+                    class="device-static" fill="none" stroke="url(#gBodyRim)" stroke-width="2.4" stroke-opacity=".85"/>
+
+              <!-- soft side shading -->
+              <path class="device-static" d="M84 446L78 476Q72 492 62 506" fill="none" stroke="#b7ae9c" stroke-width="8" stroke-opacity=".18" stroke-linecap="round"/>
+              <path class="device-static" d="M316 446L322 476Q328 492 338 506" fill="none" stroke="#ffffff" stroke-width="8" stroke-opacity=".35" stroke-linecap="round"/>
+
+              <!-- cable socket -->
+              <g class="dev-socket" id="cableSocket" tabindex="0" role="button" aria-label="Insert treatment cable">
+                <rect x="176" y="8" width="48" height="20" rx="7" fill="#e6e2d8" stroke="#c3bcac" stroke-width="1"/>
+                <rect x="186" y="12" width="28" height="9" rx="4" fill="#202628"/>
+                <rect x="188" y="14" width="24" height="5" rx="2.5" fill="#0a0d0e"/>
+              </g>
+
+              <!-- LCD -->
+              <g class="dev-lcd-frame device-static">
+                <rect x="88" y="54" width="224" height="160" rx="11" fill="url(#gBezel)"/>
+                <rect x="93" y="59" width="214" height="150" rx="7" fill="#0a0d0e"/>
+                <rect x="96" y="62" width="208" height="144" rx="5" fill="url(#gRecess)"/>
+              </g>
+
+              <!-- wordmark -->
+              <text class="dev-wordmark device-static" x="200" y="238" text-anchor="middle" font-size="21" letter-spacing="4.5">STIMPOD</text>
+
+              <!-- LED -->
+              <g class="dev-led" id="ledWrap">
+                <rect x="184" y="262" width="32" height="7" rx="3.5" fill="#2c3230"/>
+                <rect id="led" x="186" y="264" width="28" height="3" rx="1.5" fill="#1d2a24"/>
+                <rect id="ledGlow" x="186" y="264" width="28" height="3" rx="1.5" fill="#3dff9e" opacity="0" filter="url(#fLedGlow)"/>
+              </g>
+
+              <!-- labels -->
+              <text class="dev-label device-static" x="96" y="272" text-anchor="middle" font-size="9">menu</text>
+              <text class="dev-label device-static" x="304" y="272" text-anchor="middle" font-size="9">enter</text>
+
+              <!-- menu button -->
+              <g class="dev-btn device-static" id="svgMenuBtn">
+                <circle cx="124" cy="300" r="27" fill="#3b0d29"/>
+                <circle cx="124" cy="300" r="25" fill="url(#gBtn)"/>
+                <circle cx="124" cy="300" r="25" fill="none" stroke="#a5447d" stroke-opacity=".5" stroke-width="1"/>
+                <path d="M114 305h5v-10h6v10h5v-10h5v10h5" fill="none" stroke="#f6e9f1" stroke-width="2.4"
+                      stroke-linecap="round" stroke-linejoin="round"/>
+              </g>
+
+              <!-- enter button -->
+              <g class="dev-btn device-static" id="svgEnterBtn">
+                <circle cx="276" cy="300" r="27" fill="#3b0d29"/>
+                <circle cx="276" cy="300" r="25" fill="url(#gBtn)"/>
+                <circle cx="276" cy="300" r="25" fill="none" stroke="#a5447d" stroke-opacity=".5" stroke-width="1"/>
+                <text x="276" y="307" text-anchor="middle" font-family="Bahnschrift, 'DIN Alternate', sans-serif"
+                      font-size="17" font-weight="600" fill="#f6e9f1" letter-spacing=".5">Hz</text>
+              </g>
+
+              <!-- wheel -->
+              <g class="dev-wheel" id="svgWheel">
+                <circle class="device-static" cx="200" cy="356" r="58" fill="#6f7577" opacity=".55"/>
+                <circle class="device-static" cx="200" cy="356" r="56" fill="url(#gWheel)"/>
+                <circle class="device-static" cx="200" cy="356" r="56" fill="none" stroke="#e6e8e8" stroke-opacity=".55" stroke-width="1.2"/>
+                <circle class="device-static" cx="200" cy="356" r="42" fill="url(#gWheelIn)"/>
+                <circle class="device-static" cx="200" cy="356" r="42" fill="none" stroke="#6f7678" stroke-opacity=".5" stroke-width="1"/>
+
+                <!-- rotating tick ring -->
+                <g id="wheelRing" class="dev-wheel__ring">
+                  <g fill="#f2f4f4">
+                    <circle cx="200" cy="311" r="2.6"/><circle cx="200" cy="401" r="2.6"/>
+                    <circle cx="155" cy="356" r="2.6"/><circle cx="245" cy="356" r="2.6"/>
+                    <circle cx="168" cy="324" r="2.2"/><circle cx="232" cy="324" r="2.2"/>
+                    <circle cx="168" cy="388" r="2.2"/><circle cx="232" cy="388" r="2.2"/>
+                  </g>
+                </g>
+
+                <!-- chevrons -->
+                <g class="dev-wheel__chev device-static" fill="#f4f6f6">
+                  <path d="M200 316l-5 7h10z"/>
+                  <path d="M200 396l-5-7h10z"/>
+                  <path d="M160 356l7-5v10z"/>
+                  <path d="M240 356l-7-5v10z"/>
+                </g>
+              </g>
+
+              <!-- stem labels -->
+              <text class="dev-model device-static" x="200" y="434" text-anchor="middle" font-size="10" letter-spacing="1.6">NMS 460</text>
+
+              <!-- power -->
+              <g class="dev-btn device-static" id="svgPowerBtn">
+                <circle cx="200" cy="464" r="23" fill="#3b0d29"/>
+                <circle cx="200" cy="464" r="21" fill="url(#gBtn)"/>
+                <circle cx="200" cy="464" r="21" fill="none" stroke="#a5447d" stroke-opacity=".5" stroke-width="1"/>
+                <path d="M200 453v10" stroke="#f6e9f1" stroke-width="2.2" stroke-linecap="round"/>
+                <path d="M194.5 456.5a8 8 0 1 0 11 0" fill="none" stroke="#f6e9f1" stroke-width="2.2" stroke-linecap="round"/>
+              </g>
+
+              <!-- brand -->
+              <text class="dev-brand" x="200" y="516" text-anchor="middle" font-size="12" letter-spacing="1.4" data-brand="deviceFooter">ALGIAMED</text>
+              <text class="dev-brand2" x="200" y="526" text-anchor="middle" font-size="4.6" letter-spacing="2.6" data-brand="deviceFooterSub">TECHNOLOGIES</text>
+            </svg>
+
+            <!-- LCD (HTML overlay) -->
+            <div class="lcd" id="lcd" aria-live="polite">
+              <div class="lcd__main" id="lcdMain">
+                <div class="lcd__top">
+                  <div class="lcd__current"><span id="lcdCurrent">0</span><em>mA</em></div>
+                  <div class="lcd__timer" id="lcdTimer">10:00</div>
+                </div>
+                <div class="lcd__icons">
+                  <span class="lcd__icon" id="lcdWave"></span>
+                  <span class="lcd__icon" id="lcdSpeaker"></span>
+                  <span class="lcd__icon" id="lcdBattery"></span>
+                </div>
+                <div class="lcd__msg" id="lcdMsg"><span>INSERT CABLE</span></div>
+                <div class="lcd__bottom">
+                  <div class="lcd__chip" id="lcdPw">0.1ms</div>
+                  <div class="lcd__chip" id="lcdHz">2Hz</div>
+                </div>
+              </div>
+              <div class="lcd__menu" id="lcdMenu" hidden></div>
+              <div class="lcd__boot" id="lcdBoot" hidden>
+                <div class="boot__model">NMS460</div>
+                <div class="boot__ver">V4.02</div>
+                <div class="boot__user" id="bootUser"></div>
+              </div>
+              <div class="lcd__glass" aria-hidden="true"></div>
+            </div>
+
+            <!-- interactive overlays -->
+            <button class="dev-hit dev-hit--menu" id="btnMenu" aria-label="Menu / pulse width button" data-hint="menu"></button>
+            <button class="dev-hit dev-hit--enter" id="btnEnter" aria-label="Enter / frequency button" data-hint="enter"></button>
+            <button class="dev-hit dev-hit--power" id="btnPower" aria-label="Power button" data-hint="power"></button>
+
+            <div class="wheel" id="wheel" role="group" aria-label="Adjustment wheel">
+              <button class="wheel__center" id="btnPlay" aria-label="Play / pause stimulation" data-hint="play">
+                <img class="wheel__icon wheel__icon--play" src="assets/svg/play.svg" alt="" aria-hidden="true">
+                <img class="wheel__icon wheel__icon--pause" src="assets/svg/pause.svg" alt="" aria-hidden="true">
+              </button>
+              <span class="wheel__zone wheel__zone--up" data-dir="up" aria-hidden="true"></span>
+              <span class="wheel__zone wheel__zone--down" data-dir="down" aria-hidden="true"></span>
+              <span class="wheel__zone wheel__zone--left" data-dir="left" aria-hidden="true"></span>
+              <span class="wheel__zone wheel__zone--right" data-dir="right" aria-hidden="true"></span>
+            </div>
+
+            <div class="wheel__value" id="wheelValue" aria-hidden="true">
+              <span id="wheelValueNum">0</span><i>mA</i>
+            </div>
+          </div>
+
+          <div class="stage__hints" id="stageHints">
+            <span class="kbd-hint"><kbd>Space</kbd> play/pause</span>
+            <span class="kbd-hint"><kbd>â†‘</kbd><kbd>â†“</kbd> current</span>
+            <span class="kbd-hint"><kbd>M</kbd> pulse width</span>
+            <span class="kbd-hint"><kbd>F</kbd> frequency</span>
+            <span class="kbd-hint"><kbd>Esc</kbd> back</span>
+          </div>
+
+          <div class="statusbar" id="statusbar">
+            <span class="statusbar__dot" id="statusDot"></span>
+            <span class="statusbar__text" id="statusText">Device off — press and hold the power button</span>
+          </div>
+        </div>
+
+        <!-- â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ RIGHT RAIL â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+        <aside class="rail rail--right" id="railRight">
+
+          <!-- Comfort -->
+          <section class="card comfort">
+            <header class="card__head">
+              <h2 class="card__title">Patient comfort</h2>
+              <span class="pill pill--state" id="comfortPill">Idle</span>
+            </header>
+
+            <div class="gauge" id="gauge">
+              <svg viewBox="0 0 220 140" aria-hidden="true">
+                <defs>
+                  <linearGradient id="gComfort" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0" stop-color="#ff5c5c"/>
+                    <stop offset=".38" stop-color="#f5b544"/>
+                    <stop offset=".72" stop-color="#6ee7b7"/>
+                    <stop offset="1" stop-color="#38e8b0"/>
+                  </linearGradient>
+                </defs>
+                <path class="gauge__track" d="M28 122a82 82 0 1 1 164 0" fill="none" stroke="#1c2724" stroke-width="14" stroke-linecap="round"/>
+                <path class="gauge__fill" id="gaugeFill" d="M28 122a82 82 0 1 1 164 0" fill="none" stroke="url(#gComfort)"
+                      stroke-width="14" stroke-linecap="round" stroke-dasharray="258" stroke-dashoffset="258"/>
+                <g class="gauge__ticks" stroke="#4a5d57" stroke-width="1.6" stroke-linecap="round">
+                  <line x1="28" y1="122" x2="34" y2="122"/>
+                  <line x1="45" y1="69" x2="50" y2="72"/>
+                  <line x1="110" y1="40" x2="110" y2="46"/>
+                  <line x1="175" y1="69" x2="170" y2="72"/>
+                  <line x1="192" y1="122" x2="186" y2="122"/>
+                </g>
+                <g class="gauge__needle" id="gaugeNeedle">
+                  <line x1="110" y1="122" x2="110" y2="58" stroke="#eafff7" stroke-width="2.4" stroke-linecap="round"/>
+                  <circle cx="110" cy="122" r="5" fill="#eafff7"/>
+                </g>
+              </svg>
+              <div class="gauge__value"><span id="comfortValue">—</span><small>/100</small></div>
+              <div class="gauge__caption" id="comfortCaption">Start stimulation to read comfort</div>
+            </div>
+
+            <div class="comfort__readout">
+              <div><span>Set</span><strong id="roSet">0 mA</strong></div>
+              <div><span>Delivered</span><strong id="roDelivered">—</strong></div>
+              <div><span>Load index</span><strong id="roLoad">0.0</strong></div>
+            </div>
+
+            <p class="comfort__hint" id="comfortHint">Comfort is a simulated patient response. Increase current until the meter reaches the therapeutic band, then stop before it turns red.</p>
+          </section>
+
+          <!-- Tabbed panel -->
+          <section class="card card--tabs">
+            <div class="tabs" role="tablist" aria-label="Session panels">
+              <button class="tab is-active" role="tab" data-tab="tutorial" aria-selected="true">Tutorial</button>
+              <button class="tab" role="tab" data-tab="session" aria-selected="false">Session</button>
+              <button class="tab" role="tab" data-tab="log" aria-selected="false">Log</button>
+            </div>
+
+            <!-- TUTORIAL -->
+            <div class="tabpanel is-active" data-panel="tutorial" role="tabpanel">
+              <div class="tut__head">
+                <div>
+                  <div class="tut__eyebrow" id="tutEyebrow">Step 1 of 15</div>
+                  <h3 class="tut__title" id="tutTitle">Power on the device</h3>
+                </div>
+                <div class="tut__ring" id="tutRing"><span id="tutPct">0%</span></div>
+              </div>
+              <div class="tut__bar"><span id="tutBar"></span></div>
+              <div class="tut__body" id="tutBody">Press and hold the power button for about one second.</div>
+              <div class="tut__hint" id="tutHint"><b>Tip</b> The power button is at the bottom of the device.</div>
+              <div class="tut__actions">
+                <button class="btn btn--ghost btn--sm" id="tutPrev">Back</button>
+                <button class="btn btn--primary btn--sm" id="tutNext">Next step</button>
+              </div>
+              <details class="tut__all">
+                <summary>All steps <span id="tutDoneCount">0/15</span></summary>
+                <ol class="tut__list" id="tutList"></ol>
+              </details>
+              <button class="btn btn--quiet btn--xs tut__restart" id="tutRestart">Restart tutorial</button>
+            </div>
+
+            <!-- SESSION -->
+            <div class="tabpanel" data-panel="session" role="tabpanel" hidden>
+              <dl class="kv kv--tight">
+                <div class="kv__row"><dt>Waveform</dt><dd id="setWave">Hybrid RF</dd></div>
+                <div class="kv__row"><dt>Pulse width</dt><dd id="setPw">0.1 ms</dd></div>
+                <div class="kv__row"><dt>Frequency</dt><dd id="setFreq">2 Hz</dd></div>
+                <div class="kv__row"><dt>Countdown</dt><dd id="setTimer">10:00</dd></div>
+                <div class="kv__row"><dt>Speaker</dt><dd id="setVol">Medium</dd></div>
+                <div class="kv__row"><dt>Backlight</dt><dd id="setBacklight">5 sec</dd></div>
+                <div class="kv__row"><dt>Language</dt><dd id="setLang">English</dd></div>
+                <div class="kv__row"><dt>User info</dt><dd id="setUser">—</dd></div>
+              </dl>
+
+              <div class="field">
+                <span class="field__label">Trainer speed</span>
+                <div class="seg" id="segSpeed">
+                  <button data-speed="1" class="is-active">1×</button>
+                  <button data-speed="5">5×</button>
+                  <button data-speed="20">20×</button>
+                </div>
+              </div>
+
+              <div class="btn-row">
+                <button class="btn btn--ghost btn--sm" id="btnResetTimer">Reset timer</button>
+                <button class="btn btn--danger btn--sm" id="btnEndSession">End session</button>
+              </div>
+              <button class="btn btn--quiet btn--xs" id="btnResetSettings">Restore factory settings</button>
+              <p class="fineprint">Trainer speed only accelerates the countdown and accommodation model — the stimulus and LED stay in real time.</p>
+            </div>
+
+            <!-- LOG -->
+            <div class="tabpanel" data-panel="log" role="tabpanel" hidden>
+              <ul class="log" id="eventLog"></ul>
+              <button class="btn btn--quiet btn--xs" id="btnClearLog">Clear log</button>
+            </div>
+          </section>
+        </aside>
+      </div>
+
+      <!-- mobile bottom nav -->
+      <nav class="mobilenav" id="mobileNav" aria-label="Panels">
+        <button data-panel="stage" class="is-active">
+          <svg viewBox="0 0 24 24" fill="none"><rect x="6" y="2.5" width="12" height="19" rx="3" stroke="currentColor" stroke-width="1.6"/><path d="M9 6h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          Device
+        </button>
+        <button data-panel="left">
+          <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.4" stroke="currentColor" stroke-width="1.6"/><path d="M5 20c0-3.6 3.1-6 7-6s7 2.4 7 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          Patient
+        </button>
+        <button data-panel="right">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M4 15a8 8 0 1 1 16 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M12 15l4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          Coach
+        </button>
+      </nav>
+    </section>
+
+    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• REFERENCE â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+    <section class="view" id="view-guide" hidden>
+      <div class="guide">
+        <nav class="guide__nav" id="guideNav" aria-label="Reference sections"></nav>
+        <article class="guide__body" id="guideBody"></article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="appfoot">
+    <span>Training simulator · not a medical device · for education only</span>
+    <span class="appfoot__sep">·</span>
+    <span>Based on Algiamed NMS 460 IFU XM400-31A04</span>
+  </footer>
+</div>
+
+<div class="toasts" id="toasts" aria-live="polite" aria-atomic="false"></div>
+
+<!-- ABOUT MODAL -->
+<div class="modal" id="modalAbout" hidden>
+  <div class="modal__scrim" data-close></div>
+  <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="aboutTitle">
+    <button class="modal__close" data-close aria-label="Close">×</button>
+    <div class="modal__eyebrow" data-brand="modalEyebrow">ALGIAMED NMS 460</div>
+    <h2 id="aboutTitle">Training simulator</h2>
+    <p>An interactive practice environment for the Algiamed NMS 460 peripheral nerve stimulator. It reproduces the device's screen, menus, adjustment wheel and treatment workflow so clinicians can rehearse before touching a real unit.</p>
+    <ul class="modal__list">
+      <li><b>Not a medical device.</b> No output is generated. Nothing here is for diagnosis or treatment.</li>
+      <li>The comfort meter and fasciculation response are simulated patient models, not measurements.</li>
+      <li>Always follow the current Instructions for Use and your local protocols with real equipment.</li>
+    </ul>
+    <div class="modal__meta">
+      <span>Built from IFU XM400-31A04-04</span>
+      <span>v1.0</span>
+    </div>
+    <button class="btn btn--primary" data-close>Got it</button>
+  </div>
+</div>
+
+<script src="assets/js/config.js?v=6"></script>
+<script src="assets/js/core.js?v=6"></script>
+<script src="assets/js/audio.js?v=6"></script>
+<script src="assets/js/patient.js?v=6"></script>
+<script src="assets/js/device.js?v=6"></script>
+<script src="assets/js/wheel.js?v=6"></script>
+<script src="assets/js/tutorial.js?v=6"></script>
+<script src="assets/js/guide.js?v=6"></script>
+<script src="assets/js/app.js?v=6"></script>
+</body>
+</html>

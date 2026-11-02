@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Algiamed NMS 460 training simulator">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0d1714"/>
+      <stop offset="1" stop-color="#060908"/>
+    </linearGradient>
+    <linearGradient id="pulse" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#23b98d"/>
+      <stop offset=".55" stop-color="#5af0c1"/>
+      <stop offset="1" stop-color="#38e8b0"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+  <rect x="18" y="18" width="476" height="476" rx="96" fill="none" stroke="#38e8b0" stroke-opacity=".22" stroke-width="3"/>
+  <path d="M74 296h64l30-132 50 224 42-152 30 60h148" fill="none" stroke="url(#pulse)" stroke-width="26"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="404" cy="296" r="15" fill="#6b1c50"/>
+  <circle cx="404" cy="296" r="7" fill="#c05a9b"/>
+</svg>

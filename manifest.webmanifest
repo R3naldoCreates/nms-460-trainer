@@ -1,0 +1,20 @@
+{
+  "name": "ALGIAMED NMS 460 — Training Simulator",
+  "short_name": "NMS 460 Trainer",
+  "description": "Interactive practice simulator for the Algiamed NMS 460 peripheral nerve stimulator.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#070a09",
+  "theme_color": "#070a09",
+  "categories": ["medical", "education", "productivity"],
+  "icons": [
+    {
+      "src": "assets/img/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

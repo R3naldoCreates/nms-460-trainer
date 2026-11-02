@@ -1,0 +1,247 @@
+/* ============================================================
+   responsive.css — desktop, tablet, phone
+   ============================================================ */
+
+/* ── large desktop ─────────────────────────────────────── */
+
+@media (min-width: 1560px){
+  .sim{
+    grid-template-columns:minmax(300px,340px) minmax(0,1fr) minmax(350px,400px);
+  }
+  .device{ width:min(100%, 500px, calc((100dvh - 236px) * 0.6667)); }
+}
+
+/* ── small desktop / large tablet landscape ────────────── */
+
+@media (max-width: 1279px){
+  .sim{
+    grid-template-columns:minmax(250px,290px) minmax(0,1fr) minmax(292px,330px);
+    gap:14px;
+  }
+  .device{ width:min(100%, 400px, calc((100dvh - 226px) * 0.6667)); }
+  .comfort__hint{ display:none; }
+  .stage__hints{ max-width:440px; }
+}
+
+/* ── tablet: two columns, patient panel moves under device ── */
+
+@media (max-width: 1023px){
+  .sim{
+    grid-template-columns:minmax(0,1fr) minmax(290px,330px);
+    grid-template-areas:
+      "stage right"
+      "left  right";
+    align-items:start;
+  }
+  .stage{ grid-area:stage; }
+  .rail--left{
+    grid-area:left;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    align-items:start;
+    margin-top:4px;
+  }
+  .rail--right{ grid-area:right; }
+
+  .device{ width:min(100%, 420px, calc((100dvh - 232px) * 0.6667)); }
+  .stage__hints{ display:none; }
+  .stage__glow{ top:2%; }
+}
+
+/* ── tablet portrait: stack rails, keep device first ────── */
+
+@media (max-width: 899px){
+  :root{ --topbar-h:56px; }
+
+  /* reserve the fixed bottom navigation so the footer is never hidden */
+  .app{ padding-bottom:calc(72px + env(safe-area-inset-bottom)); }
+
+  .topbar{ gap:10px; }
+  .brand__sub{ display:none; }
+  .brand__name{ font-size:13px; }
+  .topnav{ margin-left:auto; }
+  .patient-chip{ display:none; }
+
+  .sim{
+    display:block;
+    padding:12px 12px 18px;
+  }
+  .rail--left,
+  .rail--right,
+  .stage{ display:none; }
+
+  .sim[data-mobile="stage"] .stage{ display:flex; }
+  .sim[data-mobile="left"]  .rail--left{ display:flex; flex-direction:column; }
+  .sim[data-mobile="right"] .rail--right{ display:flex; flex-direction:column; }
+
+  .stage{ padding-top:0; }
+  .stage__glow{ top:0; width:min(460px,100%); }
+
+  .device{
+    width:min(100%, 400px, calc((100dvh - 210px) * 0.6667));
+    min-width:220px;
+  }
+
+  .statusbar{
+    max-width:100%;
+    justify-content:center;
+    padding:8px 14px;
+  }
+  .statusbar__text{ font-size:11.5px; text-align:center; }
+
+  .mobilenav{
+    position:fixed;
+    left:0; right:0; bottom:0;
+    z-index:60;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:2px;
+    padding:6px 8px calc(6px + env(safe-area-inset-bottom));
+    background:rgba(8,13,11,.92);
+    backdrop-filter:blur(20px) saturate(150%);
+    -webkit-backdrop-filter:blur(20px) saturate(150%);
+    border-top:1px solid var(--line);
+  }
+  .mobilenav button{
+    appearance:none;
+    border:0;
+    background:transparent;
+    color:var(--ink-4);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:3px;
+    padding:7px 4px 5px;
+    border-radius:10px;
+    font-size:10px;
+    font-weight:600;
+    letter-spacing:.04em;
+    cursor:pointer;
+    transition:.16s;
+  }
+  .mobilenav button svg{ width:20px; height:20px; }
+  .mobilenav button.is-active{ color:var(--mint); background:rgba(56,232,176,.07); }
+
+  .card{ padding:14px; }
+
+  /* keep toast messages clear of the fixed bottom navigation */
+  .toasts{
+    bottom:calc(78px + env(safe-area-inset-bottom));
+    width:calc(100vw - 24px);
+  }
+
+  /* reference on tablet */
+  .guide{
+    grid-template-columns:1fr;
+    gap:18px;
+    padding:16px 14px 50px;
+  }
+  .guide__nav{
+    position:static;
+    flex-direction:row;
+    overflow-x:auto;
+    gap:4px;
+    padding-bottom:8px;
+    border-bottom:1px solid var(--line);
+    scrollbar-width:none;
+  }
+  .guide__nav::-webkit-scrollbar{ display:none; }
+  .guide__nav .navgroup{ display:none; }
+  .guide__nav button{
+    border-left:0;
+    border-bottom:2px solid transparent;
+    white-space:nowrap;
+    padding:8px 12px;
+  }
+  .guide__nav button.is-active{
+    border-left:0;
+    border-bottom-color:var(--mint);
+    border-radius:8px 8px 0 0;
+  }
+  .guide__body{ max-width:none; }
+}
+
+/* ── phones ────────────────────────────────────────────── */
+
+@media (max-width: 560px){
+  body{ font-size:14px; }
+
+  .topbar{ padding:0 10px; gap:8px; }
+  .brand__mark{ width:28px; height:28px; }
+  .brand__name{ font-size:12px; letter-spacing:.12em; gap:6px; }
+  .brand__reg{ font-size:8px; }
+  .topnav{ padding:2px; }
+  .topnav__btn{ padding:6px 11px; font-size:11.5px; }
+  .icon-btn{ width:32px; height:32px; }
+  #btnAbout{ display:none; }
+
+  .sim{ padding:10px 10px 16px; }
+
+  .device{
+    width:min(100%, 380px, calc((100dvh - 210px) * 0.6667));
+    min-width:200px;
+  }
+
+  .statusbar{ min-height:34px; }
+
+  .card{ border-radius:15px; padding:13px; }
+  .card__title{ font-size:10px; }
+
+  .fasc{ grid-template-columns:96px 1fr; }
+  .fasc__svg{ width:96px; }
+
+  .gauge__value span{ font-size:36px; }
+
+  .appfoot{ padding:12px 14px 20px; font-size:10px; text-align:center; }
+
+  .guide h1{ font-size:24px; }
+  .guide .screenmap{ grid-template-columns:1fr 1fr; }
+  .guide .nerves{ grid-template-columns:1fr; }
+  .guide .specs{ grid-template-columns:1fr 1fr; }
+  .guide table{ font-size:11.5px; }
+  .guide th, .guide td{ padding:7px 6px; }
+}
+
+/* ── very small phones ─────────────────────────────────── */
+
+@media (max-width: 380px){
+  .device{
+    width:min(100%, 340px, calc((100dvh - 292px) * 0.6667));
+  }
+  .brand__name{ font-size:11px; }
+  .topnav__btn{ padding:6px 9px; font-size:11px; }
+  .guide .screenmap{ grid-template-columns:1fr; }
+}
+
+/* ── landscape phones ──────────────────────────────────── */
+
+@media (max-height: 560px) and (orientation: landscape){
+  .device{
+    width:min(64vw, calc((100dvh - 130px) * 0.6667));
+  }
+  .stage__hints, .statusbar{ display:none; }
+  .mobilenav{ padding:4px 8px; }
+  .mobilenav button{ flex-direction:row; gap:7px; font-size:11px; padding:6px 4px; }
+  .mobilenav button svg{ width:17px; height:17px; }
+}
+
+/* ── touch ─────────────────────────────────────────────── */
+
+@media (hover: none){
+  .btn:hover,
+  .proc-btn:hover,
+  .icon-btn:hover,
+  .tab:hover{ background:inherit; }
+  .dev-hit:hover::after{ border-color:transparent; }
+  .wheel__center:hover::after{ border-color:transparent; }
+}
+
+/* ── reduced motion ────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce){
+  .fasc__arm.is-twitch .band,
+  .fasc__ripple.is-live,
+  .fasc__spark.is-live{ animation:none; }
+  .statusbar__dot.is-live{ animation:none; }
+}

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 46 24" width="46" height="24">
+  <!-- NMS 460 LCD icon · square-wave stimulation mode.
+       Edit this file to change the icon. Keep the 46 × 24 proportions
+       (or update the viewBox) and leave a little padding at the edges. -->
+  <path d="M1 21h5V8h5v13h5V8h5v13h5V8h5v13h5V8h5"
+        fill="none" stroke="#0d1a19" stroke-width="2.2" stroke-linejoin="round"/>
+</svg>
