@@ -1,7 +1,10 @@
-﻿# build output, dev scratch
+# build output, dev scratch
 dist/
 _research/
 *.zip
+
+# Rust build output for the publish tool
+tools/nmsdeploy/target/
 
 # OS / editor
 Thumbs.db

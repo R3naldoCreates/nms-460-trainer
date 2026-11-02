@@ -159,6 +159,27 @@ dist/
 
 Both folders are complete static sites with relative paths, artwork and the local `serve.cmd` helper. Upload the **contents** so `index.html` sits at the site root; the GitHub Pages copy includes `.nojekyll`. Each package has its own `README.md` with step-by-step deployment notes. Re-run the script after editing source files so the packages pick up the changes.
 
+## Publish to GitHub Pages
+
+```bat
+publish.cmd                       :: commit everything, push, wait for Pages
+publish.cmd -m "Fix the step strip"
+publish.cmd --dry-run             :: show what would go up, change nothing
+publish.cmd --no-verify           :: push without waiting for the live check
+publish.cmd --help                :: every option
+```
+
+`publish.cmd` runs **`tools/nmsdeploy`** — a small dependency-free Rust tool (≈230 KB) that:
+
+1. lists what is about to go up and stops there with `--dry-run`;
+2. writes `build.json` with a UTC build stamp;
+3. commits, pushes `main`, and then **polls the live site until it serves that exact stamp**, so "pushed" and "live" stop being two different things;
+4. reloads the page and checks it answers `200`.
+
+It shells out to `git` (your GitHub credential is already in Windows Credential Manager, so there is nothing to configure) and to the `curl.exe` built into Windows. No tokens, no API keys, no cargo dependencies.
+
+The exe lives at `tools/nmsdeploy/target/release/nmsdeploy.exe` (gitignored). If it is missing, `publish.cmd` builds it on the spot — that needs Rust on `PATH`; without Rust, run `package.ps1` and upload the `dist/github-pages` folder by hand as before.
+
 ## Simulation notes
 
 - **Comfort ceiling** is randomised 15.0–30.0 in 0.1 steps and represents the load tolerated at 0.1 ms. Load = current × (0.2 ms ? 2 : 1), so switching to 0.2 ms halves the current at which the ceiling is reached.

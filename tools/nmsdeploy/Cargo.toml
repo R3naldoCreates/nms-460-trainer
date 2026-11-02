@@ -1,0 +1,16 @@
+[package]
+name = "nmsdeploy"
+version = "1.0.0"
+edition = "2021"
+description = "Stage, commit, push and verify the NMS 460 Trainer on GitHub Pages"
+publish = false
+
+[[bin]]
+name = "nmsdeploy"
+path = "src/main.rs"
+
+[profile.release]
+opt-level = "z"
+lto = true
+strip = true
+panic = "abort"
