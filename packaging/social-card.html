@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>NMS 460 Trainer — social card</title>
+<style>
+  /* Dev-only: renders the 1200 x 630 share image used for og:image and the
+     README hero. Regenerate with:
+       node _research/cdp.mjs --url http://127.0.0.1:8103/packaging/social-card.html \
+            --w 1200 --h 630 --scale 2 --out shots/social.png
+     then downscale to 1200 x 630. */
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html,body{ width:1200px; height:630px; overflow:hidden; }
+  body{
+    background:#070a09;
+    color:#e9f2ee;
+    font-family:'Segoe UI', system-ui, -apple-system, sans-serif;
+    display:grid;
+    grid-template-columns:1fr 520px;
+    align-items:center;
+    position:relative;
+  }
+  body::before{
+    content:"";
+    position:absolute; inset:0;
+    background:
+      radial-gradient(760px 520px at 78% 46%, rgba(56,232,176,.16), transparent 68%),
+      radial-gradient(900px 600px at 6% 100%, rgba(56,232,176,.07), transparent 70%);
+  }
+  body::after{
+    content:"";
+    position:absolute; inset:0;
+    background:linear-gradient(90deg, rgba(7,10,9,.9) 34%, transparent 62%);
+  }
+  .copy{ padding:0 24px 0 76px; position:relative; z-index:2; }
+  .eyebrow{
+    display:flex; align-items:center; gap:11px;
+    font-size:15px; font-weight:700; letter-spacing:.22em;
+    color:#38e8b0; text-transform:uppercase; margin-bottom:26px;
+  }
+  .eyebrow svg{ width:26px; height:26px; }
+  h1{
+    font-size:62px; line-height:1.04; letter-spacing:-.022em; font-weight:750;
+    margin-bottom:20px;
+  }
+  h1 em{ font-style:normal; color:#38e8b0; }
+  p{ font-size:20.5px; line-height:1.5; color:#b9c9c3; max-width:540px; }
+  .pill{
+    display:inline-flex; align-items:center; gap:10px;
+    margin-top:34px; padding:11px 18px; border-radius:99px;
+    border:1px solid rgba(56,232,176,.34);
+    background:rgba(56,232,176,.09);
+    color:#38e8b0; font-size:15.5px; font-weight:600;
+    font-family:ui-monospace, 'Cascadia Mono', Consolas, monospace;
+  }
+  .pill i{ width:8px; height:8px; border-radius:50%; background:#38e8b0; display:block; }
+  .foot{
+    margin-top:22px; font-size:13.5px; letter-spacing:.04em; color:#5d716a;
+  }
+  .stage{
+    position:relative; z-index:2;
+    display:grid; place-items:center;
+    padding-right:56px;
+  }
+  .stage img{
+    width:auto; height:520px; display:block;
+    filter:drop-shadow(0 34px 54px rgba(0,0,0,.62));
+  }
+</style>
+</head>
+<body>
+  <div class="copy">
+    <div class="eyebrow">
+      <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <rect x="1" y="1" width="30" height="30" rx="9" stroke="currentColor" stroke-opacity=".45"/>
+        <path d="M6 20h4l2.5-9 4 14 3-9 2 4h4.5" stroke="currentColor" stroke-width="2.1"
+              stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Algiamed · STIMPOD
+    </div>
+    <h1>NMS 460<br><em>Training Simulator</em></h1>
+    <p>Boot the unit, work the setup menus and wheel, then run the full treatment
+       workflow against a simulated patient — all in the browser.</p>
+    <div class="pill"><i></i>r3naldocreates.github.io/nms-460-trainer</div>
+    <div class="foot">Not a medical device · educational model</div>
+  </div>
+  <div class="stage">
+    <img src="../assets/svg/device-body.svg" alt="Algiamed NMS 460 peripheral nerve stimulator">
+  </div>
+</body>
+</html>

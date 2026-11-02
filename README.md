@@ -2,14 +2,22 @@
 
 A browser-based, fully interactive training simulator for the **Algiamed NMS 460** peripheral nerve stimulator. It reproduces the device's screen, setup menus, adjustment wheel, stimulation workflow and a simulated patient response so clinicians can rehearse before touching a real unit.
 
+![Algiamed NMS 460 training simulator](assets/img/social-card.png)
+
+### ▶ [Open the live simulator](https://r3naldocreates.github.io/nms-460-trainer/)
+
+Nothing to install — it runs in any current browser on a PC, tablet or phone, and installs to a home screen from the same link.
+
 > **Not a medical device.** This is an educational model. No electrical output is generated and nothing here is for diagnosis or treatment. Always follow the current Instructions for Use and your local protocols with real equipment.
 
-## Run it
+## Run it locally
+
+Only needed if you are editing the source. The hosted link above needs nothing.
 
 No build step, no dependencies, no CDN.
 
 - **Quickest:** double-click `index.html`.
-- **Local server (recommended):** double-click `serve.cmd`, or run one of:
+- **Local server (recommended while developing):** double-click `serve.cmd`, or run one of:
   ```bash
   python -m http.server 8080
   npx serve .
