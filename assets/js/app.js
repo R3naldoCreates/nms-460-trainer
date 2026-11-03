@@ -17,6 +17,7 @@ window.NMS = window.NMS || {};
   let lastTwitch = 0;
   let twitchTimer = 0;
   let lastOpenToast = 0;
+  let resetArmed = 0;
   let modalOverflow = '';
 
   const LANG_NAMES = { en: 'English', fr: 'Français', it: 'Italiano', nl: 'Nederlands', es: 'Español' };
@@ -531,6 +532,23 @@ window.NMS = window.NMS || {};
       N.audio.click();
     });
 
+    // Clear everything and start over. Two taps, so it cannot happen by accident.
+    el.btnReset.addEventListener('click', () => {
+      const now = U.now();
+      if (now - resetArmed > 4000) {
+        resetArmed = now;
+        el.btnReset.classList.add('is-armed');
+        el.btnReset.title = 'Tap again to clear everything';
+        U.toast('Tap the reset button again to clear all settings and start over', 'warn', 3200);
+        return;
+      }
+      el.btnReset.classList.remove('is-armed');
+      U.store.del('defaults2');
+      U.store.del('tutorial');
+      U.toast('Settings cleared — starting over', 'ok', 1400);
+      setTimeout(() => window.location.reload(), 400);
+    });
+
     el.btnAbout.addEventListener('click', openAbout);
     $$('[data-close]', el.modalAbout).forEach(b => b.addEventListener('click', closeAbout));
 
@@ -743,6 +761,7 @@ window.NMS = window.NMS || {};
     el.eventLog = $('#eventLog');
 
     el.btnSound = $('#btnSound');
+    el.btnReset = $('#btnReset');
     el.btnAbout = $('#btnAbout');
     el.modalAbout = $('#modalAbout');
 

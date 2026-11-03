@@ -28,10 +28,10 @@
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<link rel="stylesheet" href="assets/css/base.css?v=13">
-<link rel="stylesheet" href="assets/css/device.css?v=13">
-<link rel="stylesheet" href="assets/css/panels.css?v=13">
-<link rel="stylesheet" href="assets/css/responsive.css?v=13">
+<link rel="stylesheet" href="assets/css/base.css?v=14">
+<link rel="stylesheet" href="assets/css/device.css?v=14">
+<link rel="stylesheet" href="assets/css/panels.css?v=14">
+<link rel="stylesheet" href="assets/css/responsive.css?v=14">
 </head>
 <body>
 
@@ -69,6 +69,12 @@
           <path class="icon-btn__wave" d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"
                 stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
           <path class="icon-btn__slash" d="M16 8l6 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <button class="icon-btn" id="btnReset" title="Clear settings and start again" aria-label="Clear settings and start again">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M20 12a8 8 0 1 1-2.6-5.9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          <path d="M20 4.2v4.6h-4.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </button>
       <button class="icon-btn" id="btnAbout" title="About this simulator" aria-label="About this simulator">
@@ -474,13 +480,9 @@
             <span class="kbd-hint"><kbd>Esc</kbd> back</span>
           </div>
 
-          <div class="statusbar" id="statusbar">
-            <span class="statusbar__dot" id="statusDot"></span>
-            <span class="statusbar__text" id="statusText">Device off — press and hold the power button</span>
-          </div>
-
           <!-- compact patient vitals, shown on phones so the response is
-               visible while the device is in front of you -->
+               visible while the device is in front of you. Kept above the
+               status bar so both fit the screen without scrolling. -->
           <div class="vitals" id="vitals" aria-hidden="true">
             <div class="vitals__group">
               <span class="vitals__label">Fasciculation</span>
@@ -490,6 +492,11 @@
               <span class="vitals__label">Pain</span>
               <span class="vitals__bars vitals__bars--pain" id="vitalsPain"><i></i><i></i><i></i><i></i><i></i></span>
             </div>
+          </div>
+
+          <div class="statusbar" id="statusbar">
+            <span class="statusbar__dot" id="statusDot"></span>
+            <span class="statusbar__text" id="statusText">Device off — press and hold the power button</span>
           </div>
         </div>
 
@@ -667,14 +674,14 @@
   </div>
 </div>
 
-<script src="assets/js/config.js?v=13"></script>
-<script src="assets/js/core.js?v=13"></script>
-<script src="assets/js/audio.js?v=13"></script>
-<script src="assets/js/patient.js?v=13"></script>
-<script src="assets/js/device.js?v=13"></script>
-<script src="assets/js/wheel.js?v=13"></script>
-<script src="assets/js/tutorial.js?v=13"></script>
-<script src="assets/js/guide.js?v=13"></script>
-<script src="assets/js/app.js?v=13"></script>
+<script src="assets/js/config.js?v=14"></script>
+<script src="assets/js/core.js?v=14"></script>
+<script src="assets/js/audio.js?v=14"></script>
+<script src="assets/js/patient.js?v=14"></script>
+<script src="assets/js/device.js?v=14"></script>
+<script src="assets/js/wheel.js?v=14"></script>
+<script src="assets/js/tutorial.js?v=14"></script>
+<script src="assets/js/guide.js?v=14"></script>
+<script src="assets/js/app.js?v=14"></script>
 </body>
 </html>

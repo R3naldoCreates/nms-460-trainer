@@ -62,6 +62,7 @@ window.NMS = window.NMS || {};
       body: 'The unit has booted at <strong>0.2&nbsp;ms</strong>. Press the <strong>Menu</strong> button once so the screen reads 0.1&nbsp;ms. At 0.2&nbsp;ms every pulse carries twice the charge, so this comes down before the patient is stimulated.',
       hint: 'One press of Menu takes 0.2 ms to 0.1 ms — check the chip in the bottom-left of the screen.',
       target: 'menu',
+      look: 'device',
       check: s => s.pw === 0.1
     },
     {
@@ -70,6 +71,7 @@ window.NMS = window.NMS || {};
       body: 'The unit has booted at <strong>10&nbsp;Hz</strong>. Press <strong>Enter / Hz</strong> until the screen reads 2&nbsp;Hz. Slower stimulation lets you judge each response before the next pulse arrives.',
       hint: 'Keep pressing Enter — the unit cycles 1, 2, 5 and 10 Hz.',
       target: 'enter',
+      look: 'device',
       check: s => s.freq === 2
     },
     {
@@ -78,6 +80,7 @@ window.NMS = window.NMS || {};
       body: '0.1&nbsp;ms and 2&nbsp;Hz are set. Press the <strong>play</strong> button in the centre of the wheel to start.',
       hint: 'From here the settings stay put — the rest of this lesson is about the patient.',
       target: 'play',
+      look: 'device',
       check: s => s.stimulating
     },
     {
@@ -86,6 +89,7 @@ window.NMS = window.NMS || {};
       body: 'Turn the wheel to raise the current slowly. Watch the <strong>fasciculation</strong> bar — a motor nerve twitches once the current passes its threshold.',
       hint: 'Do not touch the pulse width or frequency now. Raise the current one step at a time.',
       target: 'wheel',
+      look: 'device',
       check: s => s.stimulating && s.circuit && s.fasc.active
     },
     {
@@ -194,7 +198,7 @@ window.NMS = window.NMS || {};
   /** highlight the bottom-nav panel the current step needs (mobile only)
       step.look uses human names; the nav buttons key off data-panel */
   function applyLook() {
-    const map = { patient: 'left', coach: 'right' };
+    const map = { patient: 'left', coach: 'right', device: 'stage' };
     const look = step().look || '';
     const need = map[look] || look;
     U.$$('#mobileNav button').forEach(b => {

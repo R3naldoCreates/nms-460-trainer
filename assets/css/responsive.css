@@ -202,9 +202,11 @@
   .vitals__bars--pain i.is-on{ background:var(--amber); }
   .vitals__bars--pain i.is-hot{ background:var(--red); }
 
+  /* leave room for the step strip, the vitals strip, the status bar and the
+     fixed bottom nav, so nothing needs scrolling on a phone */
   .device{
-    width:min(100%, 400px, calc((100dvh - 210px) * 0.6667));
-    min-width:220px;
+    width:min(100%, 400px, calc((100dvh - 300px) * 0.6667));
+    min-width:190px;
   }
 
   .statusbar{
@@ -317,8 +319,8 @@
   .sim{ padding:10px 10px 16px; }
 
   .device{
-    width:min(100%, 380px, calc((100dvh - 210px) * 0.6667));
-    min-width:200px;
+    width:min(100%, 380px, calc((100dvh - 300px) * 0.6667));
+    min-width:180px;
   }
 
   .statusbar{ min-height:34px; }
@@ -344,12 +346,11 @@
 /* ── very small phones ─────────────────────────────────── */
 
 @media (max-width: 380px){
-  .device{
-    width:min(100%, 340px, calc((100dvh - 292px) * 0.6667));
-  }
   .brand__name{ font-size:11px; }
   .topnav__btn{ padding:6px 9px; font-size:11px; }
   .guide .screenmap{ grid-template-columns:1fr; }
+  /* the reset button is the least urgent control at this size */
+  #btnReset{ display:none; }
 }
 
 /* ── landscape phones: device beside the active panel ────

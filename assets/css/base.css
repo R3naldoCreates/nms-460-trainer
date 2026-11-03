@@ -244,6 +244,14 @@ kbd{ font-family:var(--font-mono); }
 .icon-btn[aria-pressed="true"] .icon-btn__slash{ opacity:0; }
 .icon-btn__slash{ transition:opacity .2s; }
 
+/* reset button, armed for the second confirm tap */
+.icon-btn.is-armed{
+  color:var(--amber);
+  border-color:rgba(245,181,68,.55);
+  background:rgba(245,181,68,.12);
+  box-shadow:0 0 0 3px rgba(245,181,68,.14);
+}
+
 .main{ flex:1; min-height:0; }
 
 .view{ display:none; }
