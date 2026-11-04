@@ -28,10 +28,10 @@
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<link rel="stylesheet" href="assets/css/base.css?v=17">
-<link rel="stylesheet" href="assets/css/device.css?v=17">
-<link rel="stylesheet" href="assets/css/panels.css?v=17">
-<link rel="stylesheet" href="assets/css/responsive.css?v=17">
+<link rel="stylesheet" href="assets/css/base.css?v=18">
+<link rel="stylesheet" href="assets/css/device.css?v=18">
+<link rel="stylesheet" href="assets/css/panels.css?v=18">
+<link rel="stylesheet" href="assets/css/responsive.css?v=18">
 </head>
 <body>
 
@@ -425,6 +425,20 @@
             </svg>
 
             <!-- LCD (HTML overlay) -->
+            <!-- cable hint arrow: points from the left at the connector on top
+                 of the unit. Shown by tutorial.js while the cable step runs. -->
+            <svg class="cable-arrow" id="cableArrow" viewBox="0 0 400 600" aria-hidden="true">
+              <defs>
+                <marker id="cableArrowHead" viewBox="0 0 12 12" refX="9" refY="6"
+                        markerWidth="5" markerHeight="5" orient="auto">
+                  <path d="M0 0 L12 6 L0 12 Z" fill="#38e8b0"/>
+                </marker>
+              </defs>
+              <path class="cable-arrow__glow" d="M60 78 C 94 54, 130 36, 170 27"/>
+              <path class="cable-arrow__line" d="M60 78 C 94 54, 130 36, 170 27"
+                    marker-end="url(#cableArrowHead)"/>
+            </svg>
+
             <div class="lcd" id="lcd" aria-live="polite">
               <div class="lcd__main" id="lcdMain">
                 <div class="lcd__top">
@@ -674,15 +688,15 @@
   </div>
 </div>
 
-<script src="assets/js/compat.js?v=17"></script>
-<script src="assets/js/config.js?v=17"></script>
-<script src="assets/js/core.js?v=17"></script>
-<script src="assets/js/audio.js?v=17"></script>
-<script src="assets/js/patient.js?v=17"></script>
-<script src="assets/js/device.js?v=17"></script>
-<script src="assets/js/wheel.js?v=17"></script>
-<script src="assets/js/tutorial.js?v=17"></script>
-<script src="assets/js/guide.js?v=17"></script>
-<script src="assets/js/app.js?v=17"></script>
+<script src="assets/js/compat.js?v=18"></script>
+<script src="assets/js/config.js?v=18"></script>
+<script src="assets/js/core.js?v=18"></script>
+<script src="assets/js/audio.js?v=18"></script>
+<script src="assets/js/patient.js?v=18"></script>
+<script src="assets/js/device.js?v=18"></script>
+<script src="assets/js/wheel.js?v=18"></script>
+<script src="assets/js/tutorial.js?v=18"></script>
+<script src="assets/js/guide.js?v=18"></script>
+<script src="assets/js/app.js?v=18"></script>
 </body>
 </html>

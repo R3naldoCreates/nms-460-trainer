@@ -212,6 +212,11 @@ window.NMS = window.NMS || {};
 
   function hintTarget(key) {
     U.$$('.is-hinted').forEach(e => e.classList.remove('is-hinted'));
+
+    // the cable step also gets a pointing arrow from the left of the unit
+    const arrow = U.$('#cableArrow');
+    if (arrow) arrow.classList.toggle('is-on', key === 'cable');
+
     if (!key) return;
     const map = {
       power: '#btnPower',
