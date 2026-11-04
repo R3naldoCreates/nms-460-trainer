@@ -20,6 +20,7 @@
   .sim{
     grid-template-columns:minmax(300px,340px) minmax(0,1fr) minmax(350px,400px);
   }
+  .device{ width:min(100%, 500px, calc((100vh - 236px) * 0.6667)); }
   .device{ width:min(100%, 500px, calc((100dvh - 236px) * 0.6667)); }
 }
 
@@ -30,6 +31,7 @@
     grid-template-columns:minmax(250px,290px) minmax(0,1fr) minmax(292px,330px);
     gap:14px;
   }
+  .device{ width:min(100%, 400px, calc((100vh - 226px) * 0.6667)); }
   .device{ width:min(100%, 400px, calc((100dvh - 226px) * 0.6667)); }
   .comfort__hint{ display:none; }
   .stage__hints{ max-width:440px; }
@@ -59,6 +61,7 @@
   }
   .rail--right{ grid-area:right; }
 
+  .device{ width:min(100%, 420px, calc((100vh - 232px) * 0.6667)); }
   .device{ width:min(100%, 420px, calc((100dvh - 232px) * 0.6667)); }
   .stage__hints{ display:none; }
   .stage__glow{ top:2%; }
@@ -205,6 +208,7 @@
   /* leave room for the step strip, the vitals strip, the status bar and the
      fixed bottom nav, so nothing needs scrolling on a phone */
   .device{
+    width:min(100%, 400px, calc((100vh - 300px) * 0.6667));
     width:min(100%, 400px, calc((100dvh - 300px) * 0.6667));
     min-width:190px;
   }
@@ -310,7 +314,9 @@
   .topbar{ padding:0 10px; gap:8px; }
   .brand__mark{ width:28px; height:28px; }
   .brand__name{ font-size:12px; letter-spacing:.12em; gap:6px; }
-  .brand__reg{ font-size:8px; }
+  /* the top bar now carries three buttons: drop the model chip so the
+     wordmark is not cut off */
+  .brand__reg{ display:none; }
   .topnav{ padding:2px; }
   .topnav__btn{ padding:6px 11px; font-size:11.5px; }
   .icon-btn{ width:32px; height:32px; }
@@ -319,6 +325,7 @@
   .sim{ padding:10px 10px 16px; }
 
   .device{
+    width:min(100%, 380px, calc((100vh - 300px) * 0.6667));
     width:min(100%, 380px, calc((100dvh - 300px) * 0.6667));
     min-width:180px;
   }
@@ -386,6 +393,7 @@
   .rail--left,
   .rail--right{
     grid-area:side;
+    max-height:calc(100vh - 112px);
     max-height:calc(100dvh - 112px);
     overflow-y:auto;
     overscroll-behavior:contain;
@@ -410,6 +418,7 @@
 
   /* never let the body clip the unit: height drives the width here */
   .device{
+    width:min(46vw, calc((100vh - 120px) * 0.6667));
     width:min(46vw, calc((100dvh - 120px) * 0.6667));
     min-width:0;
   }
@@ -439,4 +448,27 @@
   .fasc__spark.is-live{ animation:none; }
   .statusbar__dot.is-live{ animation:none; }
   .mobilenav button.is-attention{ animation:none; outline:2px solid var(--mint); }
+}
+
+/* ============================================================
+   LEGACY FALLBACKS — pre-2022 Safari / old WebViews
+   Aspect-ratio stand-ins. The wheel, hit circles, glow and the
+   .device box itself all derive their heights from aspect-ratio,
+   which is missing before iOS 15 and collapses the layout without
+   these. Only matches browsers without aspect-ratio.
+   ============================================================ */
+@supports not (aspect-ratio: 1/1){
+  .device{ height:min(678px, 150vw, calc(100vh - 232px)); }
+
+  .dev-hit--menu,
+  .dev-hit--enter{ height:0; padding-bottom:14.5%; }
+  .dev-hit--power{ height:0; padding-bottom:14%; }
+  .dev-socket-hit{ height:0; padding-bottom:11.43%; }
+
+  .wheel{ height:0; padding-bottom:30%; }
+  .wheel__center{ height:0; padding-bottom:46%; }
+
+  .stage__glow{ height:min(560px, 86vw); }
+
+  .guide .screenmap .mock{ min-height:140px; }
 }

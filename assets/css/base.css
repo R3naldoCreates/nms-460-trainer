@@ -509,9 +509,9 @@ kbd{ font-family:var(--font-mono); }
 
 /* ── modal ─────────────────────────────────────────────── */
 
-.modal{ position:fixed; inset:0; z-index:200; display:grid; place-items:center; padding:20px; }
+.modal{ position:fixed; top:0; right:0; bottom:0; left:0; z-index:200; display:grid; place-items:center; padding:20px; }
 .modal[hidden]{ display:none; }
-.modal__scrim{ position:absolute; inset:0; background:rgba(3,6,5,.72); backdrop-filter:blur(6px); }
+.modal__scrim{ position:absolute; top:0; right:0; bottom:0; left:0; background:rgba(3,6,5,.72); -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px); }
 .modal__panel{
   position:relative;
   width:min(520px,100%);

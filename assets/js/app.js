@@ -650,7 +650,10 @@ window.NMS = window.NMS || {};
     });
 
     // unlock WebAudio on the first gesture
-    document.addEventListener('pointerdown', () => N.audio.unlock(), { once: true });
+    // some browsers never fire pointer events — keep a click unlock too
+    const unlock = () => N.audio.unlock();
+    document.addEventListener('pointerdown', unlock, { once: true });
+    document.addEventListener('click', unlock, { once: true });
     document.addEventListener('keydown', () => N.audio.unlock(), { once: true });
 
     window.addEventListener('beforeunload', () => N.device.persistDefaults());

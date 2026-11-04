@@ -47,7 +47,7 @@ window.NMS = window.NMS || {};
     rotation += deg;
     if (ring) ring.style.transform = 'rotate(' + rotation.toFixed(1) + 'deg)';
     // wheel centre in the current body artwork (400 x 600 frame)
-    if (ring) ring.style.transformOrigin = '200px 371.6px';
+    if (ring) ring.style.transformOrigin = '200px 385.1px';
   }
 
   function onDown(e) {

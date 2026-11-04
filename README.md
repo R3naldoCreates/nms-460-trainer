@@ -79,6 +79,7 @@ assets/
     play.svg                   wheel centre icons
     pause.svg
   js/
+    compat.js                  PointerEvent shim for iOS ≤ 12 / old Safari (no-op elsewhere)
     config.js                  branding + session defaults + raster artwork switch
     core.js                    helpers, event bus, storage, toasts
     audio.js                   WebAudio UI / stimulus sounds
@@ -190,7 +191,15 @@ The exe lives at `tools/nmsdeploy/target/release/nmsdeploy.exe` (gitignored). If
 
 ## Browser support
 
-Current Chrome, Edge, Safari and Firefox. Uses CSS container queries for the LCD, `dvh` units, pointer events and WebAudio. `prefers-reduced-motion` is respected.
+Current Chrome, Edge, Safari and Firefox. The best experience is iOS 16 / current Safari (CSS container queries drive the LCD, `dvh` units, pointer events and WebAudio).
+
+**Older Apple browsers are supported too (fixes in v1.2):**
+
+- `assets/js/compat.js` synthesises `PointerEvent`s from touch and mouse events on iOS ≤ 12 and old macOS Safari, plus the `setPointerCapture` methods the wheel and hold gestures need. It is inert on modern browsers.
+- The LCD ships a generated static fallback under `@supports not (container-type: size)` for iOS Safari < 16, and the layout ships `aspect-ratio` / `dvh` fallbacks — the simulator stays usable on pre-2022 hardware instead of breaking.
+- You can force the shim on for testing with `index.html?compat-touch=1`.
+
+Uses CSS container queries for the LCD, `dvh` units, pointer events and WebAudio. `prefers-reduced-motion` is respected.
 
 ## Credits
 

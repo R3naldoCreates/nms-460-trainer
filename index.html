@@ -28,10 +28,10 @@
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<link rel="stylesheet" href="assets/css/base.css?v=14">
-<link rel="stylesheet" href="assets/css/device.css?v=14">
-<link rel="stylesheet" href="assets/css/panels.css?v=14">
-<link rel="stylesheet" href="assets/css/responsive.css?v=14">
+<link rel="stylesheet" href="assets/css/base.css?v=17">
+<link rel="stylesheet" href="assets/css/device.css?v=17">
+<link rel="stylesheet" href="assets/css/panels.css?v=17">
+<link rel="stylesheet" href="assets/css/responsive.css?v=17">
 </head>
 <body>
 
@@ -302,11 +302,11 @@
               <!-- cable, shown when inserted. Kept as a short stub: a long
                    run-up would cross the step strip above the device -->
               <g class="dev-cable" id="cablePlug" opacity="0">
-                <path d="M196 -18c0 26 4 42 4 64" fill="none" stroke="#1c4f47" stroke-width="9" stroke-linecap="round"/>
-                <path d="M196 -18c0 26 4 42 4 64" fill="none" stroke="#2f7d70" stroke-width="4" stroke-linecap="round" opacity=".65"/>
-                <rect x="182" y="26" width="36" height="24" rx="7" fill="#2b3234"/>
-                <rect x="186" y="30" width="28" height="9" rx="3" fill="#2f7d70"/>
-                <rect x="180" y="42" width="40" height="12" rx="4" fill="#3a4245"/>
+                <path d="M196 -26c0 8 4 12 4 14" fill="none" stroke="#1c4f47" stroke-width="9" stroke-linecap="round"/>
+                <path d="M196 -26c0 8 4 12 4 14" fill="none" stroke="#2f7d70" stroke-width="4" stroke-linecap="round" opacity=".65"/>
+                <rect x="182" y="-12" width="36" height="20" rx="7" fill="#2b3234"/>
+                <rect x="186" y="-8" width="28" height="8" rx="3" fill="#2f7d70"/>
+                <rect x="180" y="4" width="40" height="10" rx="4" fill="#3a4245"/>
               </g>
 
               <!-- -----------------------------------------------------
@@ -336,9 +336,9 @@
               <!-- cable socket: the new artwork has a flat top edge at y 53,
                    so the connector straddles it -->
               <g class="dev-socket" id="cableSocket" tabindex="0" role="button" aria-label="Insert treatment cable">
-                <rect x="178" y="42" width="44" height="20" rx="7" fill="#e6e2d8" stroke="#c3bcac" stroke-width="1"/>
-                <rect x="188" y="46" width="24" height="10" rx="4" fill="#202628"/>
-                <rect x="190" y="48" width="20" height="6" rx="3" fill="#0a0d0e"/>
+                <rect x="178" y="6" width="44" height="20" rx="7" fill="#e6e2d8" stroke="#c3bcac" stroke-width="1"/>
+                <rect x="188" y="10" width="24" height="10" rx="4" fill="#202628"/>
+                <rect x="190" y="12" width="20" height="6" rx="3" fill="#0a0d0e"/>
               </g>
 
               <!-- LCD -->
@@ -353,9 +353,9 @@
 
               <!-- LED: sits between the MENU and ENTER buttons in the new layout -->
               <g class="dev-led" id="ledWrap">
-                <rect x="184" y="284.5" width="32" height="7" rx="3.5" fill="#2c3230"/>
-                <rect id="led" x="186" y="286.5" width="28" height="3" rx="1.5" fill="#1d2a24"/>
-                <rect id="ledGlow" x="186" y="286.5" width="28" height="3" rx="1.5" fill="#3dff9e" opacity="0" filter="url(#fLedGlow)"/>
+                <rect x="184" y="292.5" width="32" height="7" rx="3.5" fill="#2c3230"/>
+                <rect id="led" x="186" y="294.5" width="28" height="3" rx="1.5" fill="#1d2a24"/>
+                <rect id="ledGlow" x="186" y="294.5" width="28" height="3" rx="1.5" fill="#3dff9e" opacity="0" filter="url(#fLedGlow)"/>
               </g>
 
               <!-- labels -->
@@ -391,10 +391,10 @@
                 <!-- rotating tick ring: centred on the new wheel at 200,371.6 -->
                 <g id="wheelRing" class="dev-wheel__ring">
                   <g fill="#f2f4f4">
-                    <circle cx="200" cy="326.6" r="2.6"/><circle cx="200" cy="416.6" r="2.6"/>
-                    <circle cx="155" cy="371.6" r="2.6"/><circle cx="245" cy="371.6" r="2.6"/>
-                    <circle cx="168" cy="339.6" r="2.2"/><circle cx="232" cy="339.6" r="2.2"/>
-                    <circle cx="168" cy="403.6" r="2.2"/><circle cx="232" cy="403.6" r="2.2"/>
+                    <circle cx="200" cy="340.1" r="2.6"/><circle cx="200" cy="430.1" r="2.6"/>
+                    <circle cx="155" cy="385.1" r="2.6"/><circle cx="245" cy="385.1" r="2.6"/>
+                    <circle cx="168" cy="353.1" r="2.2"/><circle cx="232" cy="353.1" r="2.2"/>
+                    <circle cx="168" cy="417.1" r="2.2"/><circle cx="232" cy="417.1" r="2.2"/>
                   </g>
                 </g>
 
@@ -420,8 +420,8 @@
               </g>
 
               <!-- brand -->
-              <text class="dev-brand" x="200" y="534" text-anchor="middle" font-size="12" letter-spacing="1.4" data-brand="deviceFooter">ALGIAMED</text>
-              <text class="dev-brand2" x="200" y="544" text-anchor="middle" font-size="4.6" letter-spacing="2.6" data-brand="deviceFooterSub">TECHNOLOGIES</text>
+              <text class="dev-brand" x="200" y="557" text-anchor="middle" font-size="12" letter-spacing="1.4" data-brand="deviceFooter">ALGIAMED</text>
+              <text class="dev-brand2" x="200" y="567" text-anchor="middle" font-size="4.6" letter-spacing="2.6" data-brand="deviceFooterSub">TECHNOLOGIES</text>
             </svg>
 
             <!-- LCD (HTML overlay) -->
@@ -674,14 +674,15 @@
   </div>
 </div>
 
-<script src="assets/js/config.js?v=14"></script>
-<script src="assets/js/core.js?v=14"></script>
-<script src="assets/js/audio.js?v=14"></script>
-<script src="assets/js/patient.js?v=14"></script>
-<script src="assets/js/device.js?v=14"></script>
-<script src="assets/js/wheel.js?v=14"></script>
-<script src="assets/js/tutorial.js?v=14"></script>
-<script src="assets/js/guide.js?v=14"></script>
-<script src="assets/js/app.js?v=14"></script>
+<script src="assets/js/compat.js?v=17"></script>
+<script src="assets/js/config.js?v=17"></script>
+<script src="assets/js/core.js?v=17"></script>
+<script src="assets/js/audio.js?v=17"></script>
+<script src="assets/js/patient.js?v=17"></script>
+<script src="assets/js/device.js?v=17"></script>
+<script src="assets/js/wheel.js?v=17"></script>
+<script src="assets/js/tutorial.js?v=17"></script>
+<script src="assets/js/guide.js?v=17"></script>
+<script src="assets/js/app.js?v=17"></script>
 </body>
 </html>
